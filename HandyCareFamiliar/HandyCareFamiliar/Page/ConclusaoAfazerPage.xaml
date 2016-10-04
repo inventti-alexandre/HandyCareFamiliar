@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyCareFamiliar.Page.ConclusaoAfazerPage">
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <Label Text="Horário Previsto" />
+            <DatePicker Date="{Binding oHorario.Data, Mode=TwoWay}" IsEnabled="False" />
+            <TimePicker Time="{Binding oHorario.Horario, Mode=TwoWay}" IsEnabled="False" />
+            <Label Text="Observação" />
+            <Label Text="{Binding Afazer.AfaObservacao}" />
+            <Label Text="Material" />
+            <Label Text="{Binding oMaterial.MatDescricao, Mode=TwoWay}" IsEnabled="False" />
+            <Label Text="Quantidade de material" />
+            <Label Text="{Binding oMaterial.MatQuantidade, Mode=TwoWay}" IsEnabled="False" />
+            <Label Text="Medicamento" />
+            <Label Text="{Binding oMedicamento.MedDescricao, Mode=TwoWay}" IsEnabled="False" />
+            <Label Text="Quantidade de medicamento" />
+            <Label Text="{Binding oMedicamento.MedQuantidade, Mode=TwoWay}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

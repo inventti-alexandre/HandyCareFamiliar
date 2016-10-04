@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Data\CuidadorRestService.cs" />
     <Compile Include="Data\FamiliarRestService.cs" />
     <Compile Include="Helper\BindablePicker.cs" />
     <Compile Include="Helper\HelperClass.cs" />
@@ -45,7 +44,6 @@
     <Compile Include="Helper\ILoginManager.cs" />
     <Compile Include="Helper\ListSwitch.cs" />
     <Compile Include="Helper\NullableValueConverter.cs" />
-    <Compile Include="Interface\ICuidadorRestService.cs" />
     <Compile Include="Interface\IFamiliarRestService.cs" />
     <Compile Include="Model\Afazer.cs" />
     <Compile Include="Model\Avaliacao.cs" />
@@ -82,6 +80,30 @@
     <Compile Include="Model\ViaAdministracaoMedicamento.cs" />
     <Compile Include="Model\Video.cs" />
     <Compile Include="Model\VideoFamiliar.cs" />
+    <Compile Include="PageModel\AfazerPageModel.cs" />
+    <Compile Include="PageModel\ConclusaoAfazerPageModel.cs" />
+    <Compile Include="PageModel\ListaAfazerConcluidoPageModel.cs" />
+    <Compile Include="PageModel\ListaAfazerPageModel.cs" />
+    <Compile Include="PageModel\LoginPageModel.cs" />
+    <Compile Include="PageModel\MainMenuPageModel.cs" />
+    <Compile Include="Page\AfazerPage.xaml.cs">
+      <DependentUpon>AfazerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ConclusaoAfazerPage.xaml.cs">
+      <DependentUpon>ConclusaoAfazerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ListaAfazerConcluidoPage.xaml.cs">
+      <DependentUpon>ListaAfazerConcluidoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ListaAfazerPage.xaml.cs">
+      <DependentUpon>ListaAfazerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\MainMenuPage.xaml.cs">
+      <DependentUpon>MainMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +159,34 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.3.2.127\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\AfazerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page\ConclusaoAfazerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page\ListaAfazerConcluidoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page\ListaAfazerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page\MainMenuPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
