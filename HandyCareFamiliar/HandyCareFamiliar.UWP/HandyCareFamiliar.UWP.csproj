@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="calendar.png" />
+    <Content Include="cctv.png" />
     <Content Include="facebook.png" />
     <Content Include="glove.png" />
     <Content Include="googleplus.png" />
@@ -126,6 +127,8 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="review.png" />
+    <Content Include="search.png" />
     <Content Include="smartphone.png" />
     <Content Include="splash.png" />
     <Content Include="twitter.png" />

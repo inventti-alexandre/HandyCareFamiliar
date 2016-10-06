@@ -17,6 +17,7 @@ namespace HandyCareFamiliar
     public class App : Application
     {
         public static ObservableCollection<Afazer> Afazeres { get; set; }
+        public static ObservableCollection<ConclusaoAfazer> AfazeresConcluidos { get; set; }
 
         public interface IAuthenticate
         {
@@ -38,6 +39,42 @@ namespace HandyCareFamiliar
         private void Register()
         {
             FreshIOC.Container.Register<IFamiliarRestService, FamiliarRestService>();
+        }
+        public static async Task GetAfazeres(bool sync)
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    AfazeresConcluidos =
+                        new ObservableCollection<ConclusaoAfazer>(
+                            await FamiliarRestService.DefaultManager.RefreshConclusaoAfazerAsync(sync));
+
+                    var selection =
+                        new ObservableCollection<Afazer>(
+                            await FamiliarRestService.DefaultManager.RefreshAfazerAsync(sync));
+                    if (selection.Count > 0 && AfazeresConcluidos.Count > 0)
+                    {
+                        var pacresult =
+                            new ObservableCollection<CuidadorPaciente>(
+                                await FamiliarRestService.DefaultManager.RefreshCuidadorPacienteAsync(sync))
+                                .AsEnumerable();
+                        var result = selection.Where(e => !AfazeresConcluidos.Select(m => m.ConAfazer)
+                            .Contains(e.Id))
+                            .Where(e => pacresult.Select(m => m.Id).Contains(e.AfaPaciente))
+                            .AsEnumerable();
+                        Afazeres = new ObservableCollection<Afazer>(result);
+                    }
+                    else
+                    {
+                        Afazeres = new ObservableCollection<Afazer>(selection);
+                    }
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void AbrirMainMenu(Familiar familiar)

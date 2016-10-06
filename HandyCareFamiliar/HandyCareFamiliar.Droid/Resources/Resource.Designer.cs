@@ -1717,14 +1717,14 @@ namespace HandyCareFamiliar.Droid
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int 1splash = 2130837504;
+			//// aapt resource value: 0x7f020000
+			//public const int 1splash = 2130837504;
 			
-			// aapt resource value: 0x7f020001
-			public const int 2splash = 2130837505;
+			//// aapt resource value: 0x7f020001
+			//public const int 2splash = 2130837505;
 			
-			// aapt resource value: 0x7f020002
-			public const int 3splash = 2130837506;
+			//// aapt resource value: 0x7f020002
+			//public const int 3splash = 2130837506;
 			
 			// aapt resource value: 0x7f020003
 			public const int abc_ab_share_pack_mtrl_alpha = 2130837507;
