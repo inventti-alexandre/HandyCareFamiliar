@@ -14,6 +14,7 @@ namespace HandyCareFamiliar.Model
         {
             Familiar = new HashSet<Familiar>();
         }
+
         public string Id { get; set; }
         public string ParDescricao { get; set; }
 

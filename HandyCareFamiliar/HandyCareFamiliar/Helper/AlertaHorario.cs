@@ -11,6 +11,7 @@ namespace HandyCareFamiliar
     {
         private Paciente Paciente { get; set; }
         private CuidadorPaciente CuidadorPaciente { get; set; }
+
         public async Task RunCounter(CancellationToken token)
         {
             while (true)
@@ -19,15 +20,11 @@ namespace HandyCareFamiliar
                 {
                     await App.GetAfazeres(false);
                     foreach (var item in App.Afazeres)
-                    {
                         if (Math.Abs((item.AfaHorarioPrevisto - DateTime.Now).TotalMinutes) < 1)
-                        {
                             DependencyService.Get<ILocalNotifications>().SendLocalNotification(
                                 "Handy Care",
                                 "Fazer " + item.AfaObservacao + " em " + item.AfaHorarioPrevisto,
                                 item.AfaHorarioPrevisto.Ticks);
-                        }
-                    }
                 }, token);
                 await Task.Delay(35000);
             }

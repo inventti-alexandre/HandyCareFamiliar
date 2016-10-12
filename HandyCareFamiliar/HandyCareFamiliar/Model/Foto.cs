@@ -32,7 +32,7 @@ namespace HandyCareFamiliar.Model
         public byte[] Version { get; set; }
 
         public bool? Deleted { get; set; }
-
+        public byte[] FamFoto { get; set; }
         public virtual Cuidador Cuidador { get; set; }
 
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

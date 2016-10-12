@@ -14,6 +14,7 @@ namespace HandyCareFamiliar.Model
         {
             Medicamento = new HashSet<Medicamento>();
         }
+
         public string Id { get; set; }
         public string ForSubtipo { get; set; }
 

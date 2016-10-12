@@ -28,17 +28,26 @@ namespace HandyCareFamiliar.Model
         public string FamNome { get; set; }
         public string FamDescriParentesco { get; set; }
         public string FamSobrenome { get; set; }
+
+        [JsonIgnore]
         public string FamNomeCompleto => FamNome + " " + FamSobrenome;
+
         [JsonProperty(PropertyName = "FamGoogleId")]
         public string FamGoogleId { get; set; }
+
         [JsonProperty(PropertyName = "FamFacebookId")]
         public string FamFacebookId { get; set; }
+
         [JsonProperty(PropertyName = "FamMicrosoftId")]
         public string FamMicrosoftId { get; set; }
+
         [JsonProperty(PropertyName = "FamMicrosoftAdId")]
         public string FamMicrosoftAdId { get; set; }
+
         [JsonProperty(PropertyName = "FamTwitterId")]
         public string FamTwitterId { get; set; }
+
+        public byte[] FamFoto { get; set; }
 
 
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

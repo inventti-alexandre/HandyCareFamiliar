@@ -1,9 +1,11 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using PropertyChanged;
 
 namespace HandyCareFamiliar.Model
 {
     [Table("FotoFamiliar")]
+    [ImplementPropertyChanged]
     public class FotoFamiliar
     {
         public string Id { get; set; }

@@ -9,6 +9,7 @@ namespace HandyCareFamiliar.Model
     public class PacienteFamiliar
     {
         public string Id { get; set; }
+
         [Key]
         [Column(Order = 0)]
         [StringLength(36)]
@@ -18,6 +19,5 @@ namespace HandyCareFamiliar.Model
         [Column(Order = 1)]
         [StringLength(36)]
         public string FamId { get; set; }
-
     }
 }

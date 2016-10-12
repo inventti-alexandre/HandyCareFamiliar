@@ -127,7 +127,7 @@ namespace HandyCareFamiliar.Data
             MedicamentoTable = CurrentClient.GetTable<Medicamento>();
             MotivoCuidadoTable = CurrentClient.GetTable<MotivoCuidado>();
             PeriodoTratamentoTable = CurrentClient.GetTable<PeriodoTratamento>();
-            TipoCuidadorTable= CurrentClient.GetTable<TipoCuidador>();
+            TipoCuidadorTable = CurrentClient.GetTable<TipoCuidador>();
             ValidacaoCuidadorTable = CurrentClient.GetTable<ValidacaoCuidador>();
             FotoTable = CurrentClient.GetTable<Foto>();
             FamiliarTable = CurrentClient.GetTable<Familiar>();
@@ -167,7 +167,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -177,14 +177,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await FotoTable.InsertAsync(item);
-                }
                 else
-                {
                     await FotoTable.UpdateAsync(item);
-                }
-
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -192,6 +187,7 @@ namespace HandyCareFamiliar.Data
                 Debug.WriteLine(msioe.ToString());
             }
         }
+
         public async Task DeleteFotoAsync(Foto foto)
         {
             await FotoTable.DeleteAsync(foto);
@@ -218,7 +214,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -228,14 +224,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await TipoTratamentoTable.InsertAsync(item);
-                }
                 else
-                {
                     await TipoTratamentoTable.UpdateAsync(item);
-                }
-
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -243,6 +234,7 @@ namespace HandyCareFamiliar.Data
                 Debug.WriteLine(msioe.ToString());
             }
         }
+
         public async Task DeleteTipoTratamentoAsync(TipoTratamento tipoTratamento)
         {
             await TipoTratamentoTable.DeleteAsync(tipoTratamento);
@@ -260,6 +252,7 @@ namespace HandyCareFamiliar.Data
         {
             await PacienteTable.DeleteAsync(paciente);
         }
+
         public async Task<Foto> ProcurarFotoAsync(string id, bool syncItems = false)
         {
             try
@@ -287,12 +280,13 @@ namespace HandyCareFamiliar.Data
 
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
 
-        public async Task<Cuidador> ProcurarCuidadorAsync(string id, MobileServiceAuthenticationProvider provider, bool syncItems = false)
+        public async Task<Cuidador> ProcurarCuidadorAsync(string id, MobileServiceAuthenticationProvider provider,
+            bool syncItems = false)
         {
             try
             {
@@ -334,11 +328,13 @@ namespace HandyCareFamiliar.Data
 
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
-        public async Task<Familiar> ProcurarFamiliarAsync(string id, MobileServiceAuthenticationProvider provider, bool syncItems = false)
+
+        public async Task<Familiar> ProcurarFamiliarAsync(string id, MobileServiceAuthenticationProvider provider,
+            bool syncItems = false)
         {
             try
             {
@@ -380,7 +376,7 @@ namespace HandyCareFamiliar.Data
 
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -411,7 +407,7 @@ namespace HandyCareFamiliar.Data
 
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -442,7 +438,7 @@ namespace HandyCareFamiliar.Data
 
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -473,7 +469,7 @@ namespace HandyCareFamiliar.Data
 
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -499,7 +495,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -509,14 +505,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await VideoTable.InsertAsync(video);
-                }
                 else
-                {
                     await VideoTable.UpdateAsync(video);
-                }
-
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -550,7 +541,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -560,14 +551,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await VideoFamiliarTable.InsertAsync(videoFamiliar);
-                }
                 else
-                {
                     await VideoFamiliarTable.UpdateAsync(videoFamiliar);
-                }
-
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -580,7 +566,8 @@ namespace HandyCareFamiliar.Data
             await VideoFamiliarTable.DeleteAsync(fotoFamiliar);
         }
 
-        public async Task<ObservableCollection<ViaAdministracaoMedicamento>> RefreshViaAdministracaoMedicamentoAsync(bool syncItems = false)
+        public async Task<ObservableCollection<ViaAdministracaoMedicamento>> RefreshViaAdministracaoMedicamentoAsync(
+            bool syncItems = false)
         {
             try
             {
@@ -601,12 +588,13 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
 
-        public async Task<ObservableCollection<FormaApresentacaoMedicamento>> RefreshFormaApresentacaoMedicamentoAsync(bool syncItems = false)
+        public async Task<ObservableCollection<FormaApresentacaoMedicamento>> RefreshFormaApresentacaoMedicamentoAsync(
+            bool syncItems = false)
         {
             try
             {
@@ -627,7 +615,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -653,7 +641,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -663,14 +651,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await FotoFamiliarTable.InsertAsync(fotoFamiliar);
-                }
                 else
-                {
                     await FotoFamiliarTable.UpdateAsync(fotoFamiliar);
-                }
-
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -704,7 +687,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -712,13 +695,9 @@ namespace HandyCareFamiliar.Data
         public async Task SaveParentescoAsync(Parentesco parentesco, bool isNewItem)
         {
             if (parentesco.Id == null)
-            {
                 await ParentescoTable.InsertAsync(parentesco);
-            }
             else
-            {
                 await ParentescoTable.UpdateAsync(parentesco);
-            }
         }
 
         public async Task DeleteParentescoAsync(Parentesco parentesco)
@@ -747,7 +726,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -755,13 +734,9 @@ namespace HandyCareFamiliar.Data
         public async Task SavePacienteFamiliarAsync(PacienteFamiliar pacienteFamiliar, bool isNewItem)
         {
             if (pacienteFamiliar.Id == null)
-            {
                 await PacienteFamiliarTable.InsertAsync(pacienteFamiliar);
-            }
             else
-            {
                 await PacienteFamiliarTable.UpdateAsync(pacienteFamiliar);
-            }
         }
 
         public async Task DeletePacienteFamiliarAsync(PacienteFamiliar pacienteFamiliar)
@@ -790,7 +765,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -798,13 +773,9 @@ namespace HandyCareFamiliar.Data
         public async Task SaveFamiliarAsync(Familiar familiar, bool isNewItem)
         {
             if (familiar.Id == null)
-            {
                 await FamiliarTable.InsertAsync(familiar);
-            }
             else
-            {
                 await FamiliarTable.UpdateAsync(familiar);
-            }
         }
 
         public async Task DeleteFamiliarAsync(Familiar familiar)
@@ -833,7 +804,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -841,13 +812,9 @@ namespace HandyCareFamiliar.Data
         public async Task SaveCuidadorAsync(Cuidador item, bool isNewItem)
         {
             if (isNewItem)
-            {
                 await CuidadorTable.InsertAsync(item);
-            }
             else
-            {
                 await CuidadorTable.UpdateAsync(item);
-            }
         }
 
         /***********************/ ///////////
@@ -872,7 +839,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -898,7 +865,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -908,13 +875,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await PacienteTable.InsertAsync(paciente);
-                }
                 else
-                {
                     await PacienteTable.UpdateAsync(paciente);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -949,7 +912,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -959,13 +922,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await CuidadorPacienteTable.InsertAsync(cuidadorPaciente);
-                }
                 else
-                {
                     await CuidadorPacienteTable.UpdateAsync(cuidadorPaciente);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1011,7 +970,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1021,13 +980,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (item.Id == null)
-                {
                     await AfazerTable.InsertAsync(item);
-                }
                 else
-                {
                     await AfazerTable.UpdateAsync(item);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1065,7 +1020,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1075,13 +1030,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await ConclusaoAfazerTable.InsertAsync(item);
-                }
                 else
-                {
                     await ConclusaoAfazerTable.UpdateAsync(item);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1107,7 +1058,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
         }
 
@@ -1132,7 +1083,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1159,7 +1110,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1169,13 +1120,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await MaterialTable.InsertAsync(item);
-                }
                 else
-                {
                     await MaterialTable.UpdateAsync(item);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1183,7 +1130,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
         }
 
@@ -1216,7 +1163,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1226,13 +1173,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await MaterialUtilizadoTable.InsertAsync(item);
-                }
                 else
-                {
                     await MaterialUtilizadoTable.UpdateAsync(item);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1240,7 +1183,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
         }
 
@@ -1272,7 +1215,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1282,13 +1225,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await MedicamentoAdministradoTable.InsertAsync(item);
-                }
                 else
-                {
                     await MedicamentoAdministradoTable.UpdateAsync(item);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1296,7 +1235,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
         }
 
@@ -1339,7 +1278,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1347,13 +1286,9 @@ namespace HandyCareFamiliar.Data
         public async Task SaveMedicamentoAsync(Medicamento item, bool isNewItem)
         {
             if (item.Id == null)
-            {
                 await MedicamentoTable.InsertAsync(item);
-            }
             else
-            {
                 await MedicamentoTable.UpdateAsync(item);
-            }
         }
 
         public async Task DeleteMotivoCuidadoAsync(MotivoCuidado motivoCuidado)
@@ -1382,7 +1317,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1392,13 +1327,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await MotivoCuidadoTable.InsertAsync(item);
-                }
                 else
-                {
                     await MotivoCuidadoTable.UpdateAsync(item);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1442,7 +1373,7 @@ namespace HandyCareFamiliar.Data
 
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
 
             return null;
@@ -1453,13 +1384,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (tipoCuidador.Id == null)
-                {
                     await TipoCuidadorTable.InsertAsync(tipoCuidador);
-                }
                 else
-                {
                     await TipoCuidadorTable.UpdateAsync(tipoCuidador);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1497,7 +1424,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1507,13 +1434,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await ValidacaoCuidadorTable.InsertAsync(validacaoCuidador);
-                }
                 else
-                {
                     await ValidacaoCuidadorTable.UpdateAsync(validacaoCuidador);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -1551,7 +1474,7 @@ namespace HandyCareFamiliar.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine(@"Sync error: {0}", e.ToString());
+                Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
         }
@@ -1561,13 +1484,9 @@ namespace HandyCareFamiliar.Data
             try
             {
                 if (isNewItem)
-                {
                     await PeriodoTratamentoTable.InsertAsync(item);
-                }
                 else
-                {
                     await PeriodoTratamentoTable.UpdateAsync(item);
-                }
             }
             catch (MobileServiceInvalidOperationException msioe)
             {

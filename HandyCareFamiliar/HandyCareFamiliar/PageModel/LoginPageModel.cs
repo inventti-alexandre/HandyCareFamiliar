@@ -17,7 +17,7 @@ namespace HandyCareFamiliar.PageModel
         private App app;
         private bool authenticated;
         public Familiar Familiar { get; set; }
-        public HorarioViewModel oHorarioViewModel { get; set; }
+        public PageModelHelper oHorarioViewModel { get; set; }
 
         public Command GoogleLoginCommand
         {
@@ -28,10 +28,8 @@ namespace HandyCareFamiliar.PageModel
                     try
                     {
                         if (App.Authenticator != null)
-                        {
                             authenticated =
                                 await App.Authenticator.Authenticate(MobileServiceAuthenticationProvider.Google);
-                        }
                         if (!authenticated) return;
                         Application.Current.Properties["UserId"] =
                             FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId;
@@ -42,7 +40,10 @@ namespace HandyCareFamiliar.PageModel
                         oHorarioViewModel.Visualizar = false;
                         oHorarioViewModel.ActivityRunning = true;
                         Familiar =
-                            await FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId, MobileServiceAuthenticationProvider.Google);
+                            await
+                                FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(
+                                    FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId,
+                                    MobileServiceAuthenticationProvider.Google);
                         if (Familiar != null)
                         {
                             App.Afazeres = new ObservableCollection<Afazer>();
@@ -51,7 +52,10 @@ namespace HandyCareFamiliar.PageModel
                         }
                         else
                         {
-                            var _Familiar = new Familiar { FamGoogleId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId };
+                            var _Familiar = new Familiar
+                            {
+                                FamGoogleId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId
+                            };
                             app.NewFamiliar(_Familiar, app);
                         }
                     }
@@ -63,6 +67,7 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+
         public Command LoginCommand
         {
             get
@@ -72,10 +77,8 @@ namespace HandyCareFamiliar.PageModel
                     try
                     {
                         if (App.Authenticator != null)
-                        {
                             authenticated =
                                 await App.Authenticator.Authenticate(MobileServiceAuthenticationProvider.Google);
-                        }
                         if (!authenticated) return;
                         Application.Current.Properties["UserId"] =
                             FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId;
@@ -86,7 +89,10 @@ namespace HandyCareFamiliar.PageModel
                         oHorarioViewModel.Visualizar = false;
                         oHorarioViewModel.ActivityRunning = true;
                         Familiar =
-                            await FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId, MobileServiceAuthenticationProvider.Google);
+                            await
+                                FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(
+                                    FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId,
+                                    MobileServiceAuthenticationProvider.Google);
                         if (Familiar != null)
                         {
                             App.Afazeres = new ObservableCollection<Afazer>();
@@ -95,7 +101,10 @@ namespace HandyCareFamiliar.PageModel
                         }
                         else
                         {
-                            var _Familiar = new Familiar { FamMicrosoftId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId };
+                            var _Familiar = new Familiar
+                            {
+                                FamMicrosoftId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId
+                            };
                             app.NewFamiliar(_Familiar, app);
                         }
                     }
@@ -107,6 +116,7 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+
         public Command FacebookLoginCommand
         {
             get
@@ -128,17 +138,22 @@ namespace HandyCareFamiliar.PageModel
                         oHorarioViewModel.Visualizar = false;
                         oHorarioViewModel.ActivityRunning = true;
                         Familiar =
-                            await FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId, MobileServiceAuthenticationProvider.Facebook, true);
+                            await
+                                FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(
+                                    FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId,
+                                    MobileServiceAuthenticationProvider.Facebook, true);
                         if (Familiar != null)
                         {
                             App.Afazeres = new ObservableCollection<Afazer>();
                             app.AbrirMainMenu(Familiar);
                             await App.GetAfazeres(true);
-
                         }
                         else
                         {
-                            var _Familiar = new Familiar { FamFacebookId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId };
+                            var _Familiar = new Familiar
+                            {
+                                FamFacebookId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId
+                            };
                             app.NewFamiliar(_Familiar, app);
                         }
                     }
@@ -173,17 +188,22 @@ namespace HandyCareFamiliar.PageModel
                         oHorarioViewModel.Visualizar = false;
                         oHorarioViewModel.ActivityRunning = true;
                         Familiar =
-                            await FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId, MobileServiceAuthenticationProvider.MicrosoftAccount, true);
+                            await
+                                FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(
+                                    FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId,
+                                    MobileServiceAuthenticationProvider.MicrosoftAccount, true);
                         if (Familiar != null)
                         {
                             App.Afazeres = new ObservableCollection<Afazer>();
                             app.AbrirMainMenu(Familiar);
                             await App.GetAfazeres(true);
-
                         }
                         else
                         {
-                            var _Familiar = new Familiar {FamMicrosoftId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId};
+                            var _Familiar = new Familiar
+                            {
+                                FamMicrosoftId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId
+                            };
                             app.NewFamiliar(_Familiar, app);
                         }
                     }
@@ -195,6 +215,7 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+
         public Command TwitterLoginCommand
         {
             get
@@ -217,17 +238,22 @@ namespace HandyCareFamiliar.PageModel
                         oHorarioViewModel.Visualizar = false;
                         oHorarioViewModel.ActivityRunning = true;
                         Familiar =
-                            await FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId, MobileServiceAuthenticationProvider.Twitter, true);
+                            await
+                                FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(
+                                    FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId,
+                                    MobileServiceAuthenticationProvider.Twitter, true);
                         if (Familiar != null)
                         {
                             App.Afazeres = new ObservableCollection<Afazer>();
                             app.AbrirMainMenu(Familiar);
                             await App.GetAfazeres(true);
-
                         }
                         else
                         {
-                            var _Familiar = new Familiar { FamTwitterId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId };
+                            var _Familiar = new Familiar
+                            {
+                                FamTwitterId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId
+                            };
                             app.NewFamiliar(_Familiar, app);
                         }
                     }
@@ -251,7 +277,8 @@ namespace HandyCareFamiliar.PageModel
                         if (App.Authenticator != null)
                             authenticated =
                                 await
-                                    App.Authenticator.Authenticate(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
+                                    App.Authenticator.Authenticate(
+                                        MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
                         if (!authenticated) return;
                         Application.Current.Properties["UserId"] =
                             FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId;
@@ -262,17 +289,22 @@ namespace HandyCareFamiliar.PageModel
                         oHorarioViewModel.Visualizar = false;
                         oHorarioViewModel.ActivityRunning = true;
                         Familiar =
-                            await FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId, MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory, true);
+                            await
+                                FamiliarRestService.DefaultManager.ProcurarFamiliarAsync(
+                                    FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId,
+                                    MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory, true);
                         if (Familiar != null)
                         {
                             App.Afazeres = new ObservableCollection<Afazer>();
                             app.AbrirMainMenu(Familiar);
                             await App.GetAfazeres(true);
-
                         }
                         else
                         {
-                            var _Familiar = new Familiar { FamMicrosoftAdId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId };
+                            var _Familiar = new Familiar
+                            {
+                                FamMicrosoftAdId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId
+                            };
                             app.NewFamiliar(_Familiar, app);
                         }
                     }
@@ -296,12 +328,9 @@ namespace HandyCareFamiliar.PageModel
         {
             base.ViewIsAppearing(sender, e);
             Familiar = new Familiar();
-            oHorarioViewModel = new HorarioViewModel {Visualizar = true, ActivityRunning = false};
+            oHorarioViewModel = new PageModelHelper {Visualizar = true, ActivityRunning = false};
             if (authenticated)
-            {
-                // Hide the Sign-in button.
                 oHorarioViewModel.Visualizar = false;
-            }
         }
     }
 }

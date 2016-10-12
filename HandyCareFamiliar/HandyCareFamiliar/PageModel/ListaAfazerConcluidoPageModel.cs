@@ -22,7 +22,7 @@ namespace HandyCareFamiliar.PageModel
 
         public bool DeleteVisible;
 
-        public HorarioViewModel oHorario { get; set; }
+        public PageModelHelper oHorario { get; set; }
         public Afazer AfazerSelecionado { get; set; }
         public Paciente oPaciente { get; set; }
         public ObservableCollection<Afazer> Afazeres { get; set; }
@@ -59,7 +59,7 @@ namespace HandyCareFamiliar.PageModel
             base.Init(initData);
             oPaciente = new Paciente();
             oPaciente = initData as Paciente;
-            oHorario = new HorarioViewModel {ActivityRunning = true, Visualizar = false};
+            oHorario = new PageModelHelper {ActivityRunning = true, Visualizar = false};
             AfazerSelecionado = new Afazer();
             await GetAfazeres();
         }
@@ -82,7 +82,7 @@ namespace HandyCareFamiliar.PageModel
                 {
                     var pacresult =
                         new ObservableCollection<CuidadorPaciente>(
-                            await FamiliarRestService.DefaultManager.RefreshCuidadorPacienteAsync())
+                                await FamiliarRestService.DefaultManager.RefreshCuidadorPacienteAsync())
                             .Where(e => e.PacId == oPaciente.Id)
                             .AsEnumerable();
                     AfazeresConcluidos =

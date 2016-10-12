@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FreshMvvm;
-using HandyCareFamiliar;
 using HandyCareFamiliar.Data;
 using HandyCareFamiliar.Helper;
 using HandyCareFamiliar.Model;
@@ -16,17 +14,14 @@ namespace HandyCareFamiliar.PageModel
     public class MainMenuPageModel : FreshBasePageModel
     {
         private Paciente _selectedPaciente;
+        public Image image;
         private Familiar Familiar { get; set; }
         public ObservableCollection<Paciente> Pacientes { get; set; }
-        public HorarioViewModel oHorario { get; set; }
+        public PageModelHelper oHorario { get; set; }
         public Paciente oPaciente { get; set; }
         public PacienteFamiliar PacienteFamiliar { get; set; }
         public ObservableCollection<PacienteFamiliar> FamiliaresPacientes { get; set; }
-        public Image image;
-        public void ShowImage(string filepath)
-        {
-            image.Source = ImageSource.FromFile(filepath);
-        }
+
         public Command ShowFoto
         {
             get
@@ -43,10 +38,10 @@ namespace HandyCareFamiliar.PageModel
                         await CoreMethods.DisplayAlert("Informação",
                             "Selecione um paciente", "OK");
                     }
-
                 });
             }
         }
+
         public Command ShowVideo
         {
             get
@@ -73,10 +68,11 @@ namespace HandyCareFamiliar.PageModel
             {
                 return new Command(async () =>
                 {
-                        //await CoreMethods.PushPageModel<FamiliarPageModel>(Familiar);
+                    //await CoreMethods.PushPageModel<FamiliarPageModel>(Familiar);
                 });
             }
         }
+
         public Command ShowAfazeres
         {
             get
@@ -86,7 +82,7 @@ namespace HandyCareFamiliar.PageModel
                     if (SelectedPaciente != null)
                     {
                         PacienteFamiliar = FamiliaresPacientes.FirstOrDefault(e => e.PacId == SelectedPaciente.Id);
-                        var x = new Tuple<Paciente,PacienteFamiliar>(SelectedPaciente,PacienteFamiliar);
+                        var x = new Tuple<Paciente, PacienteFamiliar>(SelectedPaciente, PacienteFamiliar);
                         //await CoreMethods.PushPageModel<ListaAfazerPageModel>(x);
                     }
                     else
@@ -106,7 +102,7 @@ namespace HandyCareFamiliar.PageModel
                 {
                     if (SelectedPaciente != null)
                     {
-                        var x = new Tuple<Paciente,bool,Familiar>(SelectedPaciente,false,Familiar);
+                        var x = new Tuple<Paciente, bool, Familiar>(SelectedPaciente, false, Familiar);
                         //await CoreMethods.PushPageModel<PacientePageModel>(x);
                     }
                     else
@@ -117,14 +113,15 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+
         public Command AddPaciente
         {
             get
             {
                 return new Command(async () =>
                 {
-                        var x = new Tuple<Paciente, bool,Familiar>(SelectedPaciente, true,Familiar);
-                        //await CoreMethods.PushPageModel<PacientePageModel>(x);
+                    var x = new Tuple<Paciente, bool, Familiar>(SelectedPaciente, true, Familiar);
+                    //await CoreMethods.PushPageModel<PacientePageModel>(x);
                 });
             }
         }
@@ -148,6 +145,7 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+
         public Command ShowMateriais
         {
             get
@@ -200,6 +198,7 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+
         public Command ShowMapa
         {
             get
@@ -211,18 +210,22 @@ namespace HandyCareFamiliar.PageModel
             }
         }
 
+        public void ShowImage(string filepath)
+        {
+            image.Source = ImageSource.FromFile(filepath);
+        }
+
         public override void Init(object initData)
         {
             try
             {
                 base.Init(initData);
-                Familiar=new Familiar();
+                Familiar = new Familiar();
                 Familiar = initData as Familiar;
-
             }
             catch (NullReferenceException e)
             {
-                    Debug.WriteLine("Ih, rapaz {0}", e.Message);
+                Debug.WriteLine("Ih, rapaz {0}", e.Message);
                 throw;
             }
         }
@@ -231,7 +234,12 @@ namespace HandyCareFamiliar.PageModel
         {
             base.ViewIsAppearing(sender, e);
             oPaciente = new Paciente();
-            oHorario = new HorarioViewModel {ActivityRunning = true, Visualizar = false,BoasVindas = "Olá, "+Familiar.FamNomeCompleto};
+            oHorario = new PageModelHelper
+            {
+                ActivityRunning = true,
+                Visualizar = false,
+                BoasVindas = "Olá, " + Familiar.FamNomeCompleto
+            };
             await GetPacientes();
             //MedImage = new Image {Source = ImageSource.FromFile("pills.png")};
         }
@@ -249,13 +257,16 @@ namespace HandyCareFamiliar.PageModel
                     //        await FamiliarRestService.DefaultManager.RefreshPacienteFamiliarAsync()).FirstOrDefault(
                     //            e => e.CuiId == Familiar.Id);
                     var familiaresPacientes = new ObservableCollection<PacienteFamiliar>(
-                            await FamiliarRestService.DefaultManager.RefreshPacienteFamiliarAsync()).Where(e => e.FamId==Familiar.Id).AsEnumerable(); 
+                        await FamiliarRestService.DefaultManager.RefreshPacienteFamiliarAsync()).Where(
+                        e => e.FamId == Familiar.Id).AsEnumerable();
                     FamiliaresPacientes = new ObservableCollection<PacienteFamiliar>(familiaresPacientes);
                     if (FamiliaresPacientes.Any())
                     {
-
-                        var result =new ObservableCollection<Paciente>(FamiliarRestService.DefaultManager.RefreshPacienteAsync().Result);
-                        var resulto = result.Where(e => FamiliaresPacientes.Select(m => m.PacId).Contains(e.Id)).AsEnumerable();
+                        var result =
+                            new ObservableCollection<Paciente>(
+                                FamiliarRestService.DefaultManager.RefreshPacienteAsync().Result);
+                        var resulto =
+                            result.Where(e => FamiliaresPacientes.Select(m => m.PacId).Contains(e.Id)).AsEnumerable();
                         Pacientes = new ObservableCollection<Paciente>(resulto);
                     }
                     oHorario.ActivityRunning = false;
