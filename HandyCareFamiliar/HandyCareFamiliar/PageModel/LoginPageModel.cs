@@ -52,11 +52,11 @@ namespace HandyCareFamiliar.PageModel
                         }
                         else
                         {
-                            var _Familiar = new Familiar
+                            var familiar = new Familiar
                             {
                                 FamGoogleId = FamiliarRestService.DefaultManager.CurrentClient.CurrentUser.UserId
                             };
-                            app.NewFamiliar(_Familiar, app);
+                            app.NewFamiliar(familiar, app);
                         }
                     }
                     catch (InvalidOperationException e)

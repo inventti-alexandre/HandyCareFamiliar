@@ -6,6 +6,7 @@
 //#define OFFLINE_SYNC_ENABLED
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -68,13 +69,15 @@ namespace HandyCareFamiliar.Data
         private readonly IMobileServiceTable<ContatoEmergencia> ContatoEmergenciaTable;
         private readonly IMobileServiceTable<ConTelefone> ConTelefoneTable;
         private readonly IMobileServiceTable<ConCelular> ConCelularTable;
+        private readonly IMobileServiceTable<ConEmail> ConEmailTable;
         private readonly IMobileServiceTable<TipoTratamento> TipoTratamentoTable;
+        private readonly IMobileServiceTable<TipoContato> TipoContatoTable;
 
 #endif
 
         public FamiliarRestService()
         {
-            //            CurrentClient = new MobileServiceClient(Constants.ApplicationURL);
+            //CurrentClient = new MobileServiceClient(Constants.ApplicationURL);
 #if DEBUG
             CurrentClient = new MobileServiceClient("http://DESKTOP-5TG6LTC/handycareappService/")
             {
@@ -142,6 +145,8 @@ namespace HandyCareFamiliar.Data
             ConCelularTable = CurrentClient.GetTable<ConCelular>();
             ConTelefoneTable = CurrentClient.GetTable<ConTelefone>();
             TipoTratamentoTable = CurrentClient.GetTable<TipoTratamento>();
+            ConEmailTable = CurrentClient.GetTable<ConEmail>();
+            TipoContatoTable = CurrentClient.GetTable<TipoContato>();
 
 #endif
         }
@@ -170,6 +175,100 @@ namespace HandyCareFamiliar.Data
                 Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
+        }
+
+        public async Task<ObservableCollection<ConEmail>> RefreshConEmailAsync(bool syncItems = false)
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                if (syncItems)
+                {
+                    await SyncAsync();
+                }
+#endif
+
+                var items = await ConEmailTable
+                    .ToEnumerableAsync();
+                return new ObservableCollection<ConEmail>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation at {0}: {1}", TipoTratamentoTable.TableName, msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"Sync error: {0}", e);
+            }
+            return null;
+
+        }
+
+        public async Task SaveContatoEmergenciaAsync(ContatoEmergencia item, bool isNewItem)
+        {
+            try
+            {
+                if (isNewItem)
+                    await ContatoEmergenciaTable.InsertAsync(item);
+                else
+                    await ContatoEmergenciaTable.UpdateAsync(item);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation at {0}: {1}", FotoTable.TableName, msioe.Message);
+                Debug.WriteLine(msioe.ToString());
+            }
+
+        }
+
+        public async Task SaveConTelefoneAsync(ConTelefone item, bool isNewItem)
+        {
+            try
+            {
+                if (isNewItem)
+                    await ConTelefoneTable.InsertAsync(item);
+                else
+                    await ConTelefoneTable.UpdateAsync(item);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation at {0}: {1}", FotoTable.TableName, msioe.Message);
+                Debug.WriteLine(msioe.ToString());
+            }
+
+        }
+
+        public async Task SaveConCelularAsync(ConCelular item, bool isNewItem)
+        {
+            try
+            {
+                if (isNewItem)
+                    await ConCelularTable.InsertAsync(item);
+                else
+                    await ConCelularTable.UpdateAsync(item);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation at {0}: {1}", FotoTable.TableName, msioe.Message);
+                Debug.WriteLine(msioe.ToString());
+            }
+
+        }
+        public async Task SaveConEmailAsync(ConEmail item, bool isNewItem)
+        {
+            try
+            {
+                if (isNewItem)
+                    await ConEmailTable.InsertAsync(item);
+                else
+                    await ConEmailTable.UpdateAsync(item);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation at {0}: {1}", FotoTable.TableName, msioe.Message);
+                Debug.WriteLine(msioe.ToString());
+            }
+
         }
 
         public async Task SaveFotoAsync(Foto item, bool isNewItem)
@@ -1497,6 +1596,30 @@ namespace HandyCareFamiliar.Data
                 Debug.WriteLine(e.Message);
             }
         }
+        public async Task<ObservableCollection<TipoContato>> RefreshTipoContatoAsync(bool syncItems = false)
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                if (syncItems)
+                {
+                    await SyncAsync();
+                }
+#endif
+                var items = await TipoContatoTable
+                    .ToEnumerableAsync();
+                return new ObservableCollection<TipoContato>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"Sync error: {0}", e);
+            }
+            return null;
+        }
 
 #if OFFLINE_SYNC_ENABLED
         public async Task SyncAsync()
@@ -1599,5 +1722,6 @@ MotivoCuidadoTable.CreateQuery());
             }
         }
 #endif
+
     }
 }

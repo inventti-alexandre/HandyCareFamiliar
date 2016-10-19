@@ -19,10 +19,18 @@ namespace HandyCareFamiliar.PageModel
     [ImplementPropertyChanged]
     public class FamiliarPageModel : FreshBasePageModel
     {
-        private Parentesco _Parentesco;
+        private Parentesco _parentesco;
+        private TipoContato _tipoContato;
         private App app;
         public Familiar Familiar { get; set; }
+        public ContatoEmergencia ContatoEmergencia { get; set; }
+        public ConCelular ConCelular { get; set; }
+        public ConEmail ConEmail { get; set; }
+        public ConTelefone ConTelefone { get; set; }
+        public ObservableCollection<TipoContato> TipoContatos { get; set; }
         public ObservableCollection<Parentesco> TiposFamiliares { get; set; }
+        public TipoContato TipoContato { get; set; }
+
         //public ValidacaoFamiliar ValidacaoFamiliar { get; set; }
         public PageModelHelper oHorario { get; set; }
         public ImageSource FamiliarFoto { get; set; }
@@ -30,10 +38,23 @@ namespace HandyCareFamiliar.PageModel
 
         public Parentesco SelectedParentesco
         {
-            get { return _Parentesco; }
+            get { return _parentesco; }
             set
             {
-                _Parentesco = value;
+                _parentesco = value;
+                if (value != null)
+                {
+                    //ShowMedicamentos.Execute(value);
+                    //SelectedPaciente = null;
+                }
+            }
+        }
+        public TipoContato SelectedTipoContato
+        {
+            get { return _tipoContato; }
+            set
+            {
+                _tipoContato = value;
                 if (value != null)
                 {
                     //ShowMedicamentos.Execute(value);
@@ -120,12 +141,23 @@ namespace HandyCareFamiliar.PageModel
                     oHorario.Visualizar = false;
                     oHorario.ActivityRunning = true;
                     Familiar.FamParentesco = SelectedParentesco.Id;
-                    await FamiliarRestService.DefaultManager.SaveFamiliarAsync(Familiar, oHorario.NovoFamiliar);
+                    Familiar.FamContatoEmergencia = ContatoEmergencia.Id;
+                    ContatoEmergencia.ConEmail = ConEmail.Id;
+                    ContatoEmergencia.ConCelular = ConCelular.Id;
+                    ContatoEmergencia.ConTelefone = ConTelefone.Id;
+                    ContatoEmergencia.ConTipo = TipoContato.Id;
+                    await Task.Run(async () =>
+                    {
+                        await FamiliarRestService.DefaultManager.SaveConCelularAsync(ConCelular, oHorario.NovoFamiliar);
+                        await FamiliarRestService.DefaultManager.SaveConEmailAsync(ConEmail, oHorario.NovoFamiliar);
+                        await FamiliarRestService.DefaultManager.SaveConTelefoneAsync(ConTelefone, oHorario.NovoFamiliar);
+                        await FamiliarRestService.DefaultManager.SaveContatoEmergenciaAsync(ContatoEmergencia, oHorario.NovoFamiliar);
+                        await FamiliarRestService.DefaultManager.SaveFamiliarAsync(Familiar, oHorario.NovoFamiliar);
+                    });
                     if (oHorario.NovoFamiliar)
                         app.AbrirMainMenu(Familiar);
                     else
                         await CoreMethods.PopPageModel(Familiar);
-
                     //                        await CoreMethods.PushPageModelWithNewNavigation<MainMenuPageModel>(Familiar);
                 });
             }
@@ -152,7 +184,11 @@ namespace HandyCareFamiliar.PageModel
                 if (x.Item2 != null)
                     app = x.Item2;
             }
-            //Familiar = initData as Familiar;
+            TipoContato=new TipoContato();
+            ConTelefone = new ConTelefone {Id = Guid.NewGuid().ToString()};
+            ConCelular =new ConCelular { Id = Guid.NewGuid().ToString() };
+            ConEmail =new ConEmail { Id = Guid.NewGuid().ToString() };
+            ContatoEmergencia =new ContatoEmergencia { Id = Guid.NewGuid().ToString() };
             oHorario.NovoFamiliar = Familiar?.Id == null;
             oHorario.NovoCadastro = Familiar?.Id == null;
             oHorario.FamiliarExibicao = Familiar?.Id != null;
@@ -168,10 +204,12 @@ namespace HandyCareFamiliar.PageModel
             {
                 await Task.Run(async () =>
                 {
-                    TiposFamiliares =
-                        new ObservableCollection<Parentesco>(
-                            await FamiliarRestService.DefaultManager.RefreshParentescoAsync());
-                    var x = TiposFamiliares.Count;
+                    TiposFamiliares = new ObservableCollection<Parentesco>(
+                        await FamiliarRestService.DefaultManager.RefreshParentescoAsync());
+                    TipoContato = new ObservableCollection<TipoContato>(
+                        await FamiliarRestService.DefaultManager.RefreshTipoContatoAsync())
+                        .FirstOrDefault(e=>e.TipDescricao=="Familiar");
+
                     //var x =
                     //    new ObservableCollection<Parentesco>(
                     //        await FamiliarRestService.DefaultManager.RefreshParentescoAsync());

@@ -10,6 +10,12 @@ namespace HandyCareFamiliar.Interface
         Task<ObservableCollection<ContatoEmergencia>> RefreshContatoEmergenciaAsync(bool syncItems = false);
         Task<ObservableCollection<ConTelefone>> RefreshConTelefoneAsync(bool syncItems = false);
         Task<ObservableCollection<ConCelular>> RefreshConCelularAsync(bool syncItems = false);
+        Task<ObservableCollection<ConEmail>> RefreshConEmailAsync(bool syncItems = false);
+        Task SaveContatoEmergenciaAsync(ContatoEmergencia contatoEmergencia, bool isNewItem);
+        Task SaveConTelefoneAsync(ConTelefone conTelefone, bool isNewItem);
+        Task SaveConCelularAsync(ConCelular conCelular, bool isNewItem);
+        Task SaveConEmailAsync(ConEmail conEmail, bool isNewItem);
+
 
         Task<ObservableCollection<TipoTratamento>> RefreshTipoTratamentoAsync(bool syncItems = false);
         Task SaveTipoTratamentoAsync(TipoTratamento tipoTratamento, bool isNewItem);
