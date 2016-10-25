@@ -72,20 +72,21 @@ namespace HandyCareFamiliar.Data
         private readonly IMobileServiceTable<ConEmail> ConEmailTable;
         private readonly IMobileServiceTable<TipoTratamento> TipoTratamentoTable;
         private readonly IMobileServiceTable<TipoContato> TipoContatoTable;
+        private readonly IMobileServiceTable<Avaliacao> AvaliacaoTable;
 
 #endif
 
         public FamiliarRestService()
         {
-            //CurrentClient = new MobileServiceClient(Constants.ApplicationURL);
-#if DEBUG
-            CurrentClient = new MobileServiceClient("http://DESKTOP-5TG6LTC/handycareappService/")
-            {
-                AlternateLoginHost = new Uri("https://handycareapp.azurewebsites.net/")
-            };
-            //#else
-            //   MobileService = new MobileServiceClient("https://{servicename}.azurewebsites.net/");  
-#endif
+            CurrentClient = new MobileServiceClient(Constants.ApplicationURL);
+            //#if DEBUG
+            //            CurrentClient = new MobileServiceClient("http://DESKTOP-5TG6LTC/handycareappService/")
+            //            {
+            //                AlternateLoginHost = new Uri("https://handycareapp.azurewebsites.net/")
+            //            };
+            //            //#else
+            //            //   MobileService = new MobileServiceClient("https://{servicename}.azurewebsites.net/");  
+            //#endif
 #if OFFLINE_SYNC_ENABLED
             var store = new MobileServiceSQLiteStore("localstore.db");
             store.DefineTable<Cuidador>();
@@ -147,7 +148,7 @@ namespace HandyCareFamiliar.Data
             TipoTratamentoTable = CurrentClient.GetTable<TipoTratamento>();
             ConEmailTable = CurrentClient.GetTable<ConEmail>();
             TipoContatoTable = CurrentClient.GetTable<TipoContato>();
-
+            AvaliacaoTable = CurrentClient.GetTable<Avaliacao>();
 #endif
         }
 
@@ -1723,5 +1724,23 @@ MotivoCuidadoTable.CreateQuery());
         }
 #endif
 
+        public async Task SaveAvaliacaoAsync(Avaliacao item, bool isNewItem)
+        {
+            try
+            {
+                if (isNewItem)
+                    await AvaliacaoTable.InsertAsync(item);
+                else
+                    await AvaliacaoTable.UpdateAsync(item);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
     }
 }

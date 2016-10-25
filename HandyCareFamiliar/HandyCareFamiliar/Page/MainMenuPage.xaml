@@ -43,13 +43,13 @@
                     <ContentView Grid.Column="1" Grid.Row="0">
                         <!--NEW-->
                         <Button x:Name="btnAvaliar" BackgroundColor="White" BorderColor="Black"
-                                Command="{Binding ShowMateriais}" IsVisible="{Binding oHorario.Visualizar}"
+                                Command="{Binding ShowAvaliacao}" IsVisible="{Binding oHorario.Visualizar}"
                                 VerticalOptions="Center" HorizontalOptions="Start" />
                     </ContentView>
                     <ContentView Grid.Column="0" Grid.Row="1">
                         <!--NEW-->
                         <Button x:Name="btnProcurar" BackgroundColor="White" BorderColor="Black"
-                                Command="{Binding ShowMedicamentos}" IsVisible="{Binding oHorario.Visualizar}"
+                                Command="{Binding ShowBusca}" IsVisible="{Binding oHorario.Visualizar}"
                                 VerticalOptions="Center" HorizontalOptions="Start" />
                     </ContentView>
                     <ContentView Grid.Column="1" Grid.Row="1">

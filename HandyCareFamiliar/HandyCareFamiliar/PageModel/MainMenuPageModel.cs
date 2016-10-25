@@ -41,6 +41,26 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+        public Command ShowAvaliacao
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedPaciente != null)
+                    {
+                        PacienteFamiliar = FamiliaresPacientes.FirstOrDefault(e => e.PacId == SelectedPaciente.Id);
+                        var x = new Tuple<PacienteFamiliar>(PacienteFamiliar);
+                        await CoreMethods.PushPageModel<ListaAvaliacaoPageModel>(x);
+                    }
+                    else
+                    {
+                        await CoreMethods.DisplayAlert("Informação",
+                            "Selecione um paciente", "OK");
+                    }
+                });
+            }
+        }
 
         public Command ShowVideo
         {
@@ -90,6 +110,16 @@ namespace HandyCareFamiliar.PageModel
                         await CoreMethods.DisplayAlert("Informação",
                             "Selecione um paciente", "OK");
                     }
+                });
+            }
+        }
+        public Command ShowBusca
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<BuscarPageModel>(Familiar);
                 });
             }
         }

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyCareFamiliar.Page.BuscarPage">
+    <ScrollView>
+        <StackLayout Padding="15">
+            <Label Text="Informe o Estado (sigla)"/>
+            <Entry Text="{Binding PageModelHelper.Estado}"/>
+            <Label Text="Informe a cidade"/>
+            <Entry Text="{Binding PageModelHelper.Cidade}"/>
+            <Button Text="Buscar" Command="{Binding BuscarCommand}"/>
+            <ListView x:Name="lstCuidadores" ItemsSource="{Binding Cuidadores, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedCuidador}" IsVisible="True" RowHeight="60">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Padding="10">
+                                <Label Text="{Binding CuiNomeCompleto}" TextColor="Black"
+                                       HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="20" />
+                                <!--<Label Text="{Binding AfaObservacao}" TextColor="Black"
+                                       HorizontalOptions="StartAndExpand" FontSize="15" />-->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

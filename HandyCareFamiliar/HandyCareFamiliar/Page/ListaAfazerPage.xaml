@@ -30,21 +30,3 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
-
-<!--<ListView x:Name="lstAfazerConcluido" ItemsSource="{Binding ConcluidosAfazeres, Mode=TwoWay}"  IsVisible="True" RowHeight="60">
-  <ListView.Header>
-    <StackLayout Padding="10">
-      <Label Text="Afazeres concluídos" FontAttributes="Bold" FontSize="22" />
-    </StackLayout>
-  </ListView.Header>
-  <ListView.ItemTemplate>
-    <DataTemplate>
-      <ViewCell>
-        <StackLayout Orientation="Vertical" Padding="10">
-          <Label Text="{Binding AfaHorarioPrevisto}" TextColor="Black" HorizontalOptions="StartAndExpand" FontAttributes="Bold"/>
-          <Label Text="{Binding AfaObservacao}" HorizontalOptions="StartAndExpand" TextColor="Green" FontSize="15"/>
-        </StackLayout>
-      </ViewCell>
-    </DataTemplate>
-  </ListView.ItemTemplate>
-</ListView>-->

@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using PropertyChanged;
 
 namespace HandyCareFamiliar.Model
 {
     [Table("Avaliacao")]
+    [ImplementPropertyChanged]
     public class Avaliacao
     {
         public string Id { get; set; }

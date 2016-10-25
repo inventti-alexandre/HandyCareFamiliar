@@ -40,6 +40,7 @@
     <Compile Include="Helper\Constants.cs" />
     <Compile Include="Data\FamiliarRestService.cs" />
     <Compile Include="Helper\BindablePicker.cs" />
+    <Compile Include="Helper\Estado.cs" />
     <Compile Include="Helper\HelperClass.cs" />
     <Compile Include="Helper\PageModelHelper.cs" />
     <Compile Include="Helper\ILoginManager.cs" />
@@ -82,17 +83,26 @@
     <Compile Include="Model\Video.cs" />
     <Compile Include="Model\VideoFamiliar.cs" />
     <Compile Include="PageModel\AfazerPageModel.cs" />
+    <Compile Include="PageModel\AvaliarPageModel.cs" />
+    <Compile Include="PageModel\BuscarPageModel.cs" />
     <Compile Include="PageModel\ConclusaoAfazerPageModel.cs" />
     <Compile Include="PageModel\FamiliarPageModel.cs" />
     <Compile Include="PageModel\FotoPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerConcluidoPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerPageModel.cs" />
+    <Compile Include="PageModel\ListaAvaliacaoPageModel.cs" />
     <Compile Include="PageModel\ListaFotoPageModel.cs" />
     <Compile Include="PageModel\LoginPageModel.cs" />
     <Compile Include="PageModel\MainMenuPageModel.cs" />
     <Compile Include="PageModel\VideoPageModel.cs" />
     <Compile Include="Page\AfazerPage.xaml.cs">
       <DependentUpon>AfazerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\AvaliarPage.xaml.cs">
+      <DependentUpon>AvaliarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\BuscarPage.xaml.cs">
+      <DependentUpon>BuscarPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\ConclusaoAfazerPage.xaml.cs">
       <DependentUpon>ConclusaoAfazerPage.xaml</DependentUpon>
@@ -108,6 +118,9 @@
     </Compile>
     <Compile Include="Page\ListaAfazerPage.xaml.cs">
       <DependentUpon>ListaAfazerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ListaAvaliacaoPage.xaml.cs">
+      <DependentUpon>ListaAvaliacaoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\ListaFotoPage.xaml.cs">
       <DependentUpon>ListaFotoPage.xaml</DependentUpon>
@@ -238,6 +251,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page\VideoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\BuscarPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\AvaliarPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\ListaAvaliacaoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

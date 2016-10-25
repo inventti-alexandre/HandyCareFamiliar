@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyCareFamiliar.Page.AvaliarPage">
+    <ScrollView>
+        <StackLayout>
+            <Label Text="{Binding PageModelHelper.BoasVindas}"/>
+            <Label Text="Informe a nota que você dá ao cuidador"/>
+            <Entry Keyboard="Numeric" Text="{Binding Avaliacao.AvaPontuacao}"/>
+            <Label Text="Descreva a sua opinião sobre o cuidador"/>
+            <Editor Text="{Binding Avaliacao.AvaDescricao}"/>
+            <Button Text="Enviar avaliacao" Command="{Binding AvaliarCommand}"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
