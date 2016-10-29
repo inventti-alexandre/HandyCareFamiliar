@@ -38,7 +38,8 @@ namespace HandyCareFamiliar.Model
 
         [JsonProperty(PropertyName = "FamTwitterId")]
         public string FamTwitterId { get; set; }
-
+        public string FamInstallationId { get; set; }
+        public string FamRegistrationId { get; set; }
         public byte[] FamFoto { get; set; }
 
         public virtual Parentesco Parentesco { get; set; }

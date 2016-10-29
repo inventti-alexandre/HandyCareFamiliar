@@ -19,7 +19,7 @@ namespace HandyCareFamiliar.PageModel
 
         private bool _finalizarAfazer;
         //private readonly IAfazerRestService _restService;
-        //private readonly ICuidadorPacienteRestService _cuidadorPacienteRestService;
+        //private readonly IPacienteFamiliarRestService _PacienteFamiliarRestService;
 
         private Afazer _selectedAfazer;
         private Paciente _selectedPaciente;
@@ -29,7 +29,7 @@ namespace HandyCareFamiliar.PageModel
         public bool deleteVisible;
 
         public PageModelHelper oHorario { get; set; }
-        public CuidadorPaciente CuidadorPaciente { get; set; }
+        public PacienteFamiliar PacienteFamiliar { get; set; }
         //public Paciente oPaciente { get; set; }
         public ObservableCollection<Afazer> Afazeres { get; set; }
         public ObservableCollection<Afazer> ConcluidosAfazeres { get; set; }
@@ -44,7 +44,7 @@ namespace HandyCareFamiliar.PageModel
                 return new Command(async () =>
                 {
                     deleteVisible = false;
-                    var x = new Tuple<Afazer, Paciente, CuidadorPaciente>(null, oPaciente, CuidadorPaciente);
+                    var x = new Tuple<Afazer, Paciente, PacienteFamiliar>(null, oPaciente, PacienteFamiliar);
                     await CoreMethods.PushPageModel<AfazerPageModel>(x);
                 });
             }
@@ -133,12 +133,12 @@ namespace HandyCareFamiliar.PageModel
         {
             base.Init(initData);
             oPaciente = new Paciente();
-            CuidadorPaciente = new CuidadorPaciente();
-            var x = initData as Tuple<Paciente, CuidadorPaciente>;
+            PacienteFamiliar = new PacienteFamiliar();
+            var x = initData as Tuple<Paciente, PacienteFamiliar>;
             if (x != null)
             {
                 oPaciente = x.Item1;
-                CuidadorPaciente = x.Item2;
+                PacienteFamiliar = x.Item2;
             }
         }
 
@@ -183,8 +183,8 @@ namespace HandyCareFamiliar.PageModel
                     if ((selection.Count > 0) && (AfazeresConcluidos.Count > 0))
                     {
                         var pacresult =
-                            new ObservableCollection<CuidadorPaciente>(
-                                    await FamiliarRestService.DefaultManager.RefreshCuidadorPacienteAsync(true))
+                            new ObservableCollection<PacienteFamiliar>(
+                                    await FamiliarRestService.DefaultManager.RefreshPacienteFamiliarAsync(true))
                                 .Where(e => e.PacId == oPaciente.Id)
                                 .AsEnumerable();
                         var result = selection.Where(e => !AfazeresConcluidos.Select(m => m.ConAfazer)

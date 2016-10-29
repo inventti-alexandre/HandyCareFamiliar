@@ -7,7 +7,7 @@
         <ActivityIndicator Color="Blue" IsRunning="{Binding oHorario.ActivityRunning, Mode=TwoWay}"
                            IsVisible="{Binding oHorario.ActivityRunning}" />
         <ListView x:Name="lstFotos" ItemsSource="{Binding Fotos, Mode=TwoWay}"
-                  SelectedItem="{Binding SelectedFoto, Mode=TwoWay}" IsVisible="True" RowHeight="60">
+                  SelectedItem="{Binding SelectedFoto, Mode=TwoWay}" IsVisible="True" RowHeight="70">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

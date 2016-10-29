@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyCareFamiliar.Page.DetalheAvaliacaoPage"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="15">
+                <Label Text="Nota"/>
+                <rating:SfRating Value="{Binding Avaliacao.AvaPontuacao}" ItemCount="5" TooltipPrecision="5"
+                                 TooltipPlacement="TopLeft" Precision="Exact" ReadOnly="True"/>
+                <Label Text="Análise"/>
+                <Editor Text="{Binding Avaliacao.AvaDescricao}" HeightRequest="200" BackgroundColor="Gray" IsEnabled="False"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

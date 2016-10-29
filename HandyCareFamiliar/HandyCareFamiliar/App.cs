@@ -3,13 +3,17 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
 using FreshMvvm;
 using HandyCareFamiliar.Data;
 using HandyCareFamiliar.Interface;
 using HandyCareFamiliar.Model;
 using HandyCareFamiliar.PageModel;
 using Microsoft.WindowsAzure.MobileServices;
+using Rox;
+using Syncfusion.SfRating.XForms;
 using Xamarin.Forms;
+using ZXing.Mobile;
 
 namespace HandyCareFamiliar
 {
@@ -38,6 +42,10 @@ namespace HandyCareFamiliar
         private void Register()
         {
             FreshIOC.Container.Register<IFamiliarRestService, FamiliarRestService>();
+            FreshIOC.Container.Register<SfRating>(new SfRating());
+            FreshIOC.Container.Register<VideoView>(new VideoView());
+            FreshIOC.Container.Register<IUserDialogs>(UserDialogs.Instance);
+            FreshIOC.Container.Register<MobileBarcodeScanner>(new MobileBarcodeScanner());
         }
 
         public static async Task GetAfazeres(bool sync)

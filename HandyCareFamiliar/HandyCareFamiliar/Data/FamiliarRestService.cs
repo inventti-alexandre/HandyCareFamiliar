@@ -73,6 +73,7 @@ namespace HandyCareFamiliar.Data
         private readonly IMobileServiceTable<TipoTratamento> TipoTratamentoTable;
         private readonly IMobileServiceTable<TipoContato> TipoContatoTable;
         private readonly IMobileServiceTable<Avaliacao> AvaliacaoTable;
+        private readonly IMobileServiceTable<Camera> CameraTable;
 
 #endif
 
@@ -84,8 +85,8 @@ namespace HandyCareFamiliar.Data
             //            {
             //                AlternateLoginHost = new Uri("https://handycareapp.azurewebsites.net/")
             //            };
-            //            //#else
-            //            //   MobileService = new MobileServiceClient("https://{servicename}.azurewebsites.net/");  
+            //#else
+            //               MobileService = new MobileServiceClient("https://{servicename}.azurewebsites.net/");  
             //#endif
 #if OFFLINE_SYNC_ENABLED
             var store = new MobileServiceSQLiteStore("localstore.db");
@@ -149,6 +150,8 @@ namespace HandyCareFamiliar.Data
             ConEmailTable = CurrentClient.GetTable<ConEmail>();
             TipoContatoTable = CurrentClient.GetTable<TipoContato>();
             AvaliacaoTable = CurrentClient.GetTable<Avaliacao>();
+            CameraTable = CurrentClient.GetTable<Camera>();
+
 #endif
         }
 
@@ -794,7 +797,7 @@ namespace HandyCareFamiliar.Data
 
         public async Task SaveParentescoAsync(Parentesco parentesco, bool isNewItem)
         {
-            if (parentesco.Id == null)
+            if (isNewItem)
                 await ParentescoTable.InsertAsync(parentesco);
             else
                 await ParentescoTable.UpdateAsync(parentesco);
@@ -833,7 +836,7 @@ namespace HandyCareFamiliar.Data
 
         public async Task SavePacienteFamiliarAsync(PacienteFamiliar pacienteFamiliar, bool isNewItem)
         {
-            if (pacienteFamiliar.Id == null)
+            if (isNewItem)
                 await PacienteFamiliarTable.InsertAsync(pacienteFamiliar);
             else
                 await PacienteFamiliarTable.UpdateAsync(pacienteFamiliar);
@@ -1741,6 +1744,56 @@ MotivoCuidadoTable.CreateQuery());
             {
                 Debug.WriteLine(e.Message);
             }
+        }
+
+        public async Task<ObservableCollection<Avaliacao>> RefreshAvaliacaoAsync(bool b)
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                if (syncItems)
+                {
+                    await SyncAsync();
+                }
+#endif
+                var items = await AvaliacaoTable
+                    .ToEnumerableAsync();
+                return new ObservableCollection<Avaliacao>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"Sync error: {0}", e);
+            }
+            return null;
+        }
+
+        public async Task<ObservableCollection<Camera>> RefreshCameraAsync(bool b)
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                if (syncItems)
+                {
+                    await SyncAsync();
+                }
+#endif
+                var items = await CameraTable
+                    .ToEnumerableAsync();
+                return new ObservableCollection<Camera>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"Sync error: {0}", e);
+            }
+            return null;
         }
     }
 }

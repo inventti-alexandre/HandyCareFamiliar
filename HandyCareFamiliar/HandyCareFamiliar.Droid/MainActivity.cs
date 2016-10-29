@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Com.Syncfusion.Rating;
 using Gcm.Client;
 using HandyCareFamiliar.Data;
 using HandyCareFamiliar.Droid.Services;
@@ -12,10 +14,14 @@ using Java.IO;
 using Java.Net;
 using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
+using Com.Syncfusion.Rating;
+using Octane.Xam.VideoPlayer.Android;
+using Syncfusion.SfRating.XForms.Droid;
 using Xamarin.Forms.Platform.Android;
 using Debug = System.Diagnostics.Debug;
 using Environment = Android.OS.Environment;
 using Exception = Java.Lang.Exception;
+
 
 namespace HandyCareFamiliar.Droid
 {
@@ -96,6 +102,10 @@ namespace HandyCareFamiliar.Droid
             Forms.Init(this, bundle);
             CurrentPlatform.Init();
             App.Init(this);
+            new SfRatingRenderer();
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();
+            UserDialogs.Init(() => this);
+            FormsVideoPlayer.Init();
             LoadApplication(new App());
             try
             {
@@ -130,6 +140,10 @@ namespace HandyCareFamiliar.Droid
         {
             base.OnActivityResult(requestCode, resultCode, data);
             var app = Xamarin.Forms.Application.Current as App;
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            global::ZXing.Net.Mobile.Forms.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

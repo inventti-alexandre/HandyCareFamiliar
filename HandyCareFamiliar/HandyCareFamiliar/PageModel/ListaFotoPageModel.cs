@@ -38,7 +38,6 @@ namespace HandyCareFamiliar.PageModel
             {
                 return new Command<Foto>(async foto =>
                 {
-                    RaisePropertyChanged("IsVisible");
                     await CoreMethods.PushPageModel<FotoPageModel>(foto);
                     foto = null;
                 });
@@ -65,9 +64,10 @@ namespace HandyCareFamiliar.PageModel
                                 await FamiliarRestService.DefaultManager.RefreshFotoFamiliarAsync()).
                             Where(e => e.FamId == Familiar.Id)
                             .AsEnumerable();
-                    FotoFamiliar = new ObservableCollection<FotoFamiliar>(x);
+                    var fotoFamiliars = x as FotoFamiliar[] ?? x.ToArray();
+                    FotoFamiliar = new ObservableCollection<FotoFamiliar>(fotoFamiliars);
                     var y = new ObservableCollection<Foto>(await FamiliarRestService.DefaultManager.RefreshFotoAsync()).
-                        Where(e => x.Select(b => b.FotId).Contains(e.Id))
+                        Where(e => fotoFamiliars.Select(b => b.FotId).Contains(e.Id))
                         .AsEnumerable();
                     Fotos = new ObservableCollection<Foto>(y.OrderBy(e => e.CreatedAt));
                     oHorario.ActivityRunning = false;

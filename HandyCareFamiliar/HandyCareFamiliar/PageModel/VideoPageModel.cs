@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using FreshMvvm;
 using HandyCareFamiliar.Model;
+using Octane.Xam.VideoPlayer;
 using PropertyChanged;
 using Rox;
 using Xamarin.Forms;
@@ -13,7 +14,7 @@ namespace HandyCareFamiliar.PageModel
     {
         private VideoView VideoView;
         public Video Video { get; set; }
-        public ImageSource VideoPaciente { get; set; }
+        public VideoSource VideoPaciente { get; set; }
 
         public bool AutoPlay { get; set; } = false;
 
@@ -25,46 +26,13 @@ namespace HandyCareFamiliar.PageModel
 
         public double Volume { get; set; } = 1;
 
-        public double SliderVolume
-        {
-            get { return Volume*100; }
-            set
-            {
-                try
-                {
-                    Volume = value/100;
-                }
-                catch
-                {
-                    Volume = 0;
-                }
-            }
-        }
-
-        public string LabelVideoStatus { get; private set; }
-
-        public ICommand PlayCommand
-        {
-            get { return new Command(async () => { await VideoView.Start(); }); }
-        }
-
-        public ICommand PauseCommand
-        {
-            get { return new Command(async () => { await VideoView.Pause(); }); }
-        }
-
-        public ICommand StopCommand
-        {
-            get { return new Command(async () => { await VideoView.Stop(); }); }
-        }
-
         public override void Init(object initData)
         {
             base.Init(initData);
             VideoView = new VideoView();
             Video = new Video();
             Video = initData as Video;
-            VideoPaciente = ImageSource.FromStream(() => new MemoryStream(Video.VidDados));
+            VideoPaciente = VideoSource.FromStream(() => new MemoryStream(Video.VidDados),"mp4");
         }
     }
 }

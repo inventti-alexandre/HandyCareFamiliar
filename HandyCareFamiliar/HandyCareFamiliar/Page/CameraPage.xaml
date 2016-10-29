@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyCareFamiliar.Page.CameraPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ContentView Grid.Column="0" Grid.Row="0">
+                <WebView Source="{Binding Camera.CamIPv4}"/>
+            </ContentView>
+            <ContentView Grid.Column="0" Grid.Row="1">
+                <Button Text="Configurar câmera" Command="{Binding ConfigurarCommand}"/>
+            </ContentView>
+        </Grid>
+        <!--<StackLayout>
+            <Button Text="Configurar câmera" Command="{Binding ConfigurarCommand}"/>
+        </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

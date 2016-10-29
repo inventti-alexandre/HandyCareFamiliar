@@ -5,7 +5,6 @@
              x:Class="HandyCareFamiliar.Page.FotoPage">
     <ScrollView>
         <StackLayout Padding="15">
-            <Label Text="Descreva a foto" />
             <Image Source="{Binding FotoPaciente}" />
             <Label Text="{Binding Foto.FotoDescricao}" />
         </StackLayout>

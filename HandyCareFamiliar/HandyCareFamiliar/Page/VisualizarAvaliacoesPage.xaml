@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyCareFamiliar.Page.VisualizarAvaliacoesPage"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ActivityIndicator Color="Blue" IsRunning="{Binding PageModelHelper.ActivityRunning, Mode=TwoWay}"
+                               IsVisible="{Binding PageModelHelper.ActivityRunning}" />
+                <Label Text="Nenhuma avaliação registrada" IsVisible="{Binding PageModelHelper.Visualizar}" />
+                <ListView x:Name="lstAvaliacoes" ItemsSource="{Binding Avaliacoes, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedAvaliacao}" IsVisible="True" RowHeight="150">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical" Padding="10">
+                                    <rating:SfRating Value="{Binding AvaPontuacao}" ItemCount="5" TooltipPrecision="5"
+                                       HorizontalOptions="StartAndExpand" ReadOnly="True" 
+                                                     TooltipPlacement="TopLeft" Precision="Exact"/>
+                                    <Label Text="{Binding AvaDescricao}" TextColor="Black"
+                                        HorizontalOptions="StartAndExpand" FontSize="20" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

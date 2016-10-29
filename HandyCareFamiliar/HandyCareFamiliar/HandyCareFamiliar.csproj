@@ -49,6 +49,7 @@
     <Compile Include="Interface\IFamiliarRestService.cs" />
     <Compile Include="Model\Afazer.cs" />
     <Compile Include="Model\Avaliacao.cs" />
+    <Compile Include="Model\Camera.cs" />
     <Compile Include="Model\ConCelular.cs" />
     <Compile Include="Model\ConclusaoAfazer.cs" />
     <Compile Include="Model\ConEmail.cs" />
@@ -84,28 +85,56 @@
     <Compile Include="Model\VideoFamiliar.cs" />
     <Compile Include="PageModel\AfazerPageModel.cs" />
     <Compile Include="PageModel\AvaliarPageModel.cs" />
+    <Compile Include="PageModel\BarcodeViewPageModel.cs" />
     <Compile Include="PageModel\BuscarPageModel.cs" />
+    <Compile Include="PageModel\CameraPageModel.cs" />
     <Compile Include="PageModel\ConclusaoAfazerPageModel.cs" />
+    <Compile Include="PageModel\ConfigurarCameraPageModel.cs" />
+    <Compile Include="PageModel\CustomScanPageModel.cs" />
+    <Compile Include="PageModel\DetalheAvaliacaoPageModel.cs" />
+    <Compile Include="PageModel\DetalheBuscaPageModel.cs" />
     <Compile Include="PageModel\FamiliarPageModel.cs" />
     <Compile Include="PageModel\FotoPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerConcluidoPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerPageModel.cs" />
     <Compile Include="PageModel\ListaAvaliacaoPageModel.cs" />
+    <Compile Include="PageModel\ListaCameraPageModel.cs" />
     <Compile Include="PageModel\ListaFotoPageModel.cs" />
+    <Compile Include="PageModel\ListaVideoPageModel.cs" />
     <Compile Include="PageModel\LoginPageModel.cs" />
     <Compile Include="PageModel\MainMenuPageModel.cs" />
+    <Compile Include="PageModel\PacientePageModel.cs" />
     <Compile Include="PageModel\VideoPageModel.cs" />
+    <Compile Include="PageModel\VisualizarAvaliacoesPageModel.cs" />
     <Compile Include="Page\AfazerPage.xaml.cs">
       <DependentUpon>AfazerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\AvaliarPage.xaml.cs">
       <DependentUpon>AvaliarPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page\BarcodeViewPage.xaml.cs">
+      <DependentUpon>BarcodeViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\BuscarPage.xaml.cs">
       <DependentUpon>BuscarPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page\CameraPage.xaml.cs">
+      <DependentUpon>CameraPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\ConclusaoAfazerPage.xaml.cs">
       <DependentUpon>ConclusaoAfazerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ConfigurarCameraPage.xaml.cs">
+      <DependentUpon>ConfigurarCameraPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\CustomScanPage.xaml.cs">
+      <DependentUpon>CustomScanPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\DetalheAvaliacaoPage.xaml.cs">
+      <DependentUpon>DetalheAvaliacaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\DetalheBuscaPage.xaml.cs">
+      <DependentUpon>DetalheBuscaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\FamiliarPage.xaml.cs">
       <DependentUpon>FamiliarPage.xaml</DependentUpon>
@@ -122,8 +151,14 @@
     <Compile Include="Page\ListaAvaliacaoPage.xaml.cs">
       <DependentUpon>ListaAvaliacaoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page\ListaCameraPage.xaml.cs">
+      <DependentUpon>ListaCameraPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\ListaFotoPage.xaml.cs">
       <DependentUpon>ListaFotoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ListaVideoPage.xaml.cs">
+      <DependentUpon>ListaVideoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -131,8 +166,14 @@
     <Compile Include="Page\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page\PacientePage.xaml.cs">
+      <DependentUpon>PacientePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\VideoPage.xaml.cs">
       <DependentUpon>VideoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\VisualizarAvaliacoesPage.xaml.cs">
+      <DependentUpon>VisualizarAvaliacoesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ILocalNotifications.cs" />
@@ -146,6 +187,14 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.2.6\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.2.6\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.Interface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FreshIOC, Version=1.0.6071.17008, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FreshMvvm.2.2.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FreshIOC.dll</HintPath>
       <Private>True</Private>
@@ -161,6 +210,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Octane.Xam.VideoPlayer">
+      <HintPath>..\..\packages\video-player-1.2.1\lib\android\Octane.Xam.VideoPlayer.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Media, Version=2.6.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Media.2.6.0.4-beta\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
@@ -182,6 +234,14 @@
       <HintPath>..\..\packages\Rox.Xamarin.Video.2.1.0-pre2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Rox.Xamarin.Video.Portable.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.SfRating.XForms, Version=14.3451.0.49, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfRating.14.3.0.49\lib\portable-win+net45+wp80+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Syncfusion.SfRating.XForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -200,6 +260,22 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.2.127\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZXing.Net.Mobile.Core, Version=2.1.47.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\portable-net45+netcore45+wpa81+wp8\ZXing.Net.Mobile.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZXing.Net.Mobile.Forms, Version=2.1.47.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.47\lib\portable-net45+netcore45+wpa81+wp8\ZXing.Net.Mobile.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.portable, Version=2.1.47.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\portable-net45+netcore45+wpa81+wp8\zxing.portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZXingNetMobile, Version=2.1.47.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\portable-net45+netcore45+wpa81+wp8\ZXingNetMobile.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -269,6 +345,66 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page\ListaAvaliacaoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\DetalheBuscaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\VisualizarAvaliacoesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\DetalheAvaliacaoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\ListaVideoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\PacientePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\CustomScanPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\BarcodeViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\CameraPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\ConfigurarCameraPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\ListaCameraPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

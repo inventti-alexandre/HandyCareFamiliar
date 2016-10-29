@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using PropertyChanged;
 
 namespace HandyCareFamiliar.Model
@@ -14,9 +16,11 @@ namespace HandyCareFamiliar.Model
         public double AvaPontuacao { get; set; }
 
         public string AvaDescricao { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
 
+        [JsonIgnore]
         public virtual Cuidador Cuidador { get; set; }
-
+        [JsonIgnore]
         public virtual Familiar Familiar { get; set; }
     }
 }

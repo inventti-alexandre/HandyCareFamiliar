@@ -1,15 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HandyCareFamiliar.Page.AvaliarPage">
-    <ScrollView>
-        <StackLayout>
-            <Label Text="{Binding PageModelHelper.BoasVindas}"/>
-            <Label Text="Informe a nota que você dá ao cuidador"/>
-            <Entry Keyboard="Numeric" Text="{Binding Avaliacao.AvaPontuacao}"/>
-            <Label Text="Descreva a sua opinião sobre o cuidador"/>
-            <Editor Text="{Binding Avaliacao.AvaDescricao}"/>
-            <Button Text="Enviar avaliacao" Command="{Binding AvaliarCommand}"/>
-        </StackLayout>
-    </ScrollView>
+             x:Class="HandyCareFamiliar.Page.AvaliarPage"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms">
+        <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="15">
+                <Label Text="{Binding PageModelHelper.BoasVindas}" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Informe a nota que você dá ao cuidador"/>
+                <rating:SfRating Value="{Binding Avaliacao.AvaPontuacao}" ItemCount="5" TooltipPrecision="5"
+                                 TooltipPlacement="TopLeft" Precision="Exact"/>
+                <Label Text="Descreva a sua opinião sobre o cuidador"/>
+                <Editor Text="{Binding Avaliacao.AvaDescricao}" HeightRequest="200" BackgroundColor="Gray"/>
+                <Button Text="Enviar avaliacao" Command="{Binding AvaliarCommand}" BackgroundColor="White" 
+                        FontAttributes="Bold" BorderWidth="10" FontSize="20" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

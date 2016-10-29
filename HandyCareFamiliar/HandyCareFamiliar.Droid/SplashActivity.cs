@@ -10,8 +10,7 @@ using Android.OS;
 namespace HandyCareFamiliar.Droid
 {
     //, ScreenOrientation = ScreenOrientation.Portrait
-    [Activity(Label = "Handy Care", Theme = "@style/Theme.Splash"
-         /*"@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"*/, MainLauncher = true, NoHistory = true,
+    [Activity(Label = "Handy Care", Theme = "@style/Theme.Splash" , MainLauncher = true, NoHistory = true,
          ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     //[Activity(Label = "Handy Care", Theme = "@style/Theme.Splash" /*"@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"*/, MainLauncher = true, NoHistory = true)]
     public class SplashActivity : Activity

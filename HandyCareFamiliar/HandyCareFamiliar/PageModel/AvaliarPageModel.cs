@@ -26,9 +26,13 @@ namespace HandyCareFamiliar.PageModel
             {
                 return new Command(async () =>
                 {
-                    Avaliacao.Id=new Guid().ToString();
-                    await FamiliarRestService.DefaultManager.SaveAvaliacaoAsync(Avaliacao, false);
-                    await CoreMethods.PopPageModel();
+                    await Task.Run(async () =>
+                    {
+                        Avaliacao.Id = Guid.NewGuid().ToString();
+                        Avaliacao.CreatedAt = DateTimeOffset.Now;
+                        await FamiliarRestService.DefaultManager.SaveAvaliacaoAsync(Avaliacao, true);
+                    });
+                    await CoreMethods.PopPageModel(Avaliacao);
                 });
             }
 
@@ -45,9 +49,10 @@ namespace HandyCareFamiliar.PageModel
             Avaliacao = new Avaliacao
             {
                 AvaCuidador = Cuidador.Id,
-                AvaFamiliar = Familiar.Id
+                AvaFamiliar = Familiar.Id,
+                AvaPontuacao = 0
             };
-            PageModelHelper = new PageModelHelper {BoasVindas = "Avalie o Cuidaddor " + Cuidador.CuiNomeCompleto};
+            PageModelHelper = new PageModelHelper {BoasVindas = "Avalie o Cuidador " + Cuidador.CuiNomeCompleto};
         }
     }
 }

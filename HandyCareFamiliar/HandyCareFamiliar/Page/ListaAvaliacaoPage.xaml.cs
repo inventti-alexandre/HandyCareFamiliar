@@ -14,5 +14,11 @@ namespace HandyCareFamiliar.Page
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            lstCuidadores?.ClearValue(ListView.SelectedItemProperty);
+        }
     }
 }

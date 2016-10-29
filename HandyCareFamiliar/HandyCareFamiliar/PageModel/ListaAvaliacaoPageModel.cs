@@ -26,8 +26,21 @@ namespace HandyCareFamiliar.PageModel
         {
             base.Init(initData);
             Familiar=new Familiar();
-            var x = initData as Tuple<PacienteFamiliar>;
+            PacienteFamiliar=new PacienteFamiliar();
+            var x = initData as Tuple<Familiar,PacienteFamiliar>;
+            if (x != null)
+            {
+                Familiar = x.Item1;
+                PacienteFamiliar = x.Item2;
+            }
+        }
+
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+            PageModelHelper = new PageModelHelper { ActivityRunning = true };
             await GetCuidadores();
+            PageModelHelper.ActivityRunning = false;
         }
 
         public Cuidador SelectedCuidador
@@ -63,10 +76,13 @@ namespace HandyCareFamiliar.PageModel
             {
                 await Task.Run(async () =>
                 {
+                    var y = new ObservableCollection<CuidadorPaciente>(await FamiliarRestService.DefaultManager
+                        .RefreshCuidadorPacienteAsync(true))
+                        .Where(e => e.PacId == PacienteFamiliar.PacId).AsQueryable();
                     var x =
                         new ObservableCollection<Cuidador>(await FamiliarRestService.DefaultManager
                         .RefreshCuidadorAsync(true))
-                        .Where(e => e.CuiCidade == PageModelHelper.Cidade).AsQueryable();
+                        .Where(e => y.Select(i=>i.CuiId).Contains(e.Id)).AsQueryable();
                     Cuidadores = new ObservableCollection<Cuidador>(x);
                 });
             }

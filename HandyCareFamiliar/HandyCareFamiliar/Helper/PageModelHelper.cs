@@ -26,6 +26,7 @@ namespace HandyCareFamiliar.Helper
         public bool FamiliarExibicao { get; set; }
         public bool NovoCadastro { get; set; }
         public string Estado { get; set; }
+        public double Media { get; set; }
         public string Cidade { get; set; }
     }
 }

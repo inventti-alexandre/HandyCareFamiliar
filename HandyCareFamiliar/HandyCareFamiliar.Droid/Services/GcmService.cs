@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Media;
@@ -9,6 +12,7 @@ using Android.Support.V4.App;
 using Android.Util;
 using Gcm.Client;
 using HandyCareFamiliar.Data;
+using HandyCareFamiliar.Model;
 using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json.Linq;
 
@@ -30,7 +34,7 @@ namespace HandyCareFamiliar.Droid.Services
     [IntentFilter(new[] {Gcm.Client.Constants.INTENT_FROM_GCM_LIBRARY_RETRY}, Categories = new[] {"@PACKAGE_NAME@"})]
     public class PushHandlerBroadcastReceiver : GcmBroadcastReceiverBase<GcmService>
     {
-        public static string[] SENDER_IDS = {"<PROJECT_NUMBER>"};
+        public static string[] SENDER_IDS = { "514404513508" };
     }
 
     [Service]
@@ -42,13 +46,22 @@ namespace HandyCareFamiliar.Droid.Services
         }
 
         public static string RegistrationID { get; private set; }
+        public Familiar Familiar { get; set; }
 
-        protected override void OnRegistered(Context context, string registrationId)
+        protected override async void OnRegistered(Context context, string registrationId)
         {
             Log.Verbose("PushHandlerBroadcastReceiver", "GCM Registered: " + registrationId);
             RegistrationID = registrationId;
 
             var push = FamiliarRestService.DefaultManager.CurrentClient.GetPush();
+
+                Familiar = new ObservableCollection<Familiar>(await 
+                    FamiliarRestService.DefaultManager.RefreshFamiliarAsync())
+                    .FirstOrDefault(e => e.FamInstallationId == push.InstallationId);
+            if (Familiar == null)
+            {
+                
+            }
 
             MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
         }
@@ -59,10 +72,12 @@ namespace HandyCareFamiliar.Droid.Services
             {
                 const string templateBodyGCM = "{\"data\":{\"message\":\"$(messageParam)\"}}";
 
-                var templates = new JObject();
-                templates["genericMessage"] = new JObject
+                var templates = new JObject
                 {
-                    {"body", templateBodyGCM}
+                    ["genericMessage"] = new JObject
+                    {
+                        {"body", templateBodyGCM}
+                    }
                 };
 
                 await push.RegisterAsync(RegistrationID, templates);

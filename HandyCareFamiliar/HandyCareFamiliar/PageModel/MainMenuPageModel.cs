@@ -8,6 +8,8 @@ using HandyCareFamiliar.Data;
 using HandyCareFamiliar.Helper;
 using HandyCareFamiliar.Model;
 using Xamarin.Forms;
+using ZXing.Mobile;
+using ZXing.Net.Mobile.Forms;
 
 namespace HandyCareFamiliar.PageModel
 {
@@ -15,7 +17,7 @@ namespace HandyCareFamiliar.PageModel
     {
         private Paciente _selectedPaciente;
         public Image image;
-        private Familiar Familiar { get; set; }
+        public Familiar Familiar { get; set; }
         public ObservableCollection<Paciente> Pacientes { get; set; }
         public PageModelHelper oHorario { get; set; }
         public Paciente oPaciente { get; set; }
@@ -30,8 +32,7 @@ namespace HandyCareFamiliar.PageModel
                 {
                     if (SelectedPaciente != null)
                     {
-                        var tupla = new Tuple<Familiar, Paciente>(Familiar, SelectedPaciente);
-                        //await CoreMethods.PushPageModel<FotoPageModel>(tupla);
+                        await CoreMethods.PushPageModel<ListaFotoPageModel>(Familiar);
                     }
                     else
                     {
@@ -50,7 +51,7 @@ namespace HandyCareFamiliar.PageModel
                     if (SelectedPaciente != null)
                     {
                         PacienteFamiliar = FamiliaresPacientes.FirstOrDefault(e => e.PacId == SelectedPaciente.Id);
-                        var x = new Tuple<PacienteFamiliar>(PacienteFamiliar);
+                        var x = new Tuple<Familiar, PacienteFamiliar>(Familiar, PacienteFamiliar);
                         await CoreMethods.PushPageModel<ListaAvaliacaoPageModel>(x);
                     }
                     else
@@ -70,8 +71,7 @@ namespace HandyCareFamiliar.PageModel
                 {
                     if (SelectedPaciente != null)
                     {
-                        var tupla = new Tuple<Familiar, Paciente>(Familiar, SelectedPaciente);
-                        //await CoreMethods.PushPageModel<VideoPageModel>(tupla);
+                        await CoreMethods.PushPageModel<ListaVideoPageModel>(Familiar);
                     }
                     else
                     {
@@ -113,6 +113,7 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+
         public Command ShowBusca
         {
             get
@@ -143,6 +144,24 @@ namespace HandyCareFamiliar.PageModel
                 });
             }
         }
+        public Command ShowCodigo
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedPaciente != null)
+                    {
+                        await CoreMethods.PushPageModel<BarcodeViewPageModel>(SelectedPaciente);
+                    }
+                    else
+                    {
+                        await CoreMethods.DisplayAlert("Informação",
+                            "Selecione um paciente", "OK");
+                    }
+                });
+            }
+        }
 
         public Command AddPaciente
         {
@@ -150,8 +169,28 @@ namespace HandyCareFamiliar.PageModel
             {
                 return new Command(async () =>
                 {
-                    var x = new Tuple<Paciente, bool, Familiar>(SelectedPaciente, true, Familiar);
-                    //await CoreMethods.PushPageModel<PacientePageModel>(x);
+                    var result = await CoreMethods.DisplayActionSheet("Informe o que você deseja fazer",
+                        "Cancelar", null, "Realizar novo cadastro", "Vincular com cadastro existente");
+                    switch (result)
+                    {
+                        case "Realizar novo cadastro":
+                        {
+                            var x = new Tuple<Paciente, bool, Familiar>(SelectedPaciente, true, Familiar);
+                            await CoreMethods.PushPageModel<PacientePageModel>(x);
+                        }
+                            break;
+                        case "Vincular com cadastro existente":
+                        {
+                                //var scanner = new MobileBarcodeScanner();
+                                //var resultado = await scanner.Scan();
+                                //if (resultado != null)
+                                //    Debug.WriteLine("Scanned Barcode: " + resultado.Text);
+                                await CoreMethods.PushPageModel<CustomScanPageModel>();
+                                // Navigate to our scanner page
+
+                            }
+                            break;
+                    }
                 });
             }
         }
@@ -219,6 +258,26 @@ namespace HandyCareFamiliar.PageModel
                     if (SelectedPaciente != null)
                     {
                         //await CoreMethods.PushPageModel<ListaMedicamentoPageModel>(SelectedPaciente);
+                    }
+                    else
+                    {
+                        await CoreMethods.DisplayAlert("Informação",
+                            "Selecione um paciente", "OK");
+                    }
+                });
+            }
+        }
+        public Command ShowCamera
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    //ENVIAR ID DO PACIENTE
+                    if (SelectedPaciente != null)
+                    {
+                        
+                        await CoreMethods.PushPageModel<ListaCameraPageModel>(Familiar);
                     }
                     else
                     {

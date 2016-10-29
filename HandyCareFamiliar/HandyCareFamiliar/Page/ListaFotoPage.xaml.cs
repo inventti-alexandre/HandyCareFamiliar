@@ -8,5 +8,11 @@ namespace HandyCareFamiliar.Page
         {
             InitializeComponent();
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            lstFotos?.ClearValue(ListView.SelectedItemProperty);
+        }
+
     }
 }

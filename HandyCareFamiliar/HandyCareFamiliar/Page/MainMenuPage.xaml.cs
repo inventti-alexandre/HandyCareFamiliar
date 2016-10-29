@@ -25,6 +25,7 @@ namespace HandyCareFamiliar.Page
             btnVideo.Text = "Vídeo";
             btnMapa.Text = "Mapa";
             btnCamera.Text = "Camera";
+            btnCodigo.Text = "Gerar código";
 
             btnAfazer.Image = (FileImageSource) ImageSource.FromFile("calendar.png");
             btnProcurar.Image = (FileImageSource) ImageSource.FromFile("search.png");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,46 @@ namespace HandyCareFamiliar.PageModel
     [ImplementPropertyChanged]
     public class BuscarPageModel:FreshBasePageModel
     {
+        private Cuidador _selectedCuidador;
         public ObservableCollection<Cuidador> Cuidadores { get; set; }
         public PageModelHelper PageModelHelper { get; set; }
-        public override async void Init(object initData)
+        public Familiar Familiar { get; set; }
+        public override void Init(object initData)
         {
             base.Init(initData);
             PageModelHelper=new PageModelHelper();
-            var x = initData as Familiar;
+            Familiar =new Familiar();
+            Familiar = initData as Familiar;
         }
+
+
+        public Cuidador SelectedCuidador
+        {
+            get { return _selectedCuidador; }
+            set
+            {
+                _selectedCuidador = value;
+                if (value != null)
+                {
+                    AfazerSelected.Execute(value);
+                    SelectedCuidador = null;
+                }
+            }
+        }
+
+        public Command<Cuidador> AfazerSelected
+        {
+            get
+            {
+                return new Command<Cuidador>(async cuidador =>
+                {
+                    var x = new Tuple<Cuidador, Familiar>(cuidador, Familiar);
+                    await CoreMethods.PushPageModel<DetalheBuscaPageModel>(x);
+                    cuidador = null;
+                });
+            }
+        }
+
         public Command BuscarCommand
         {
             get

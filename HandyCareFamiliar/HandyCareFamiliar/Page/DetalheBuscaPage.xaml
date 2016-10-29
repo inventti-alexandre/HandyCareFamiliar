@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyCareFamiliar.Page.DetalheBuscaPage"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="15">
+                <ActivityIndicator Color="Blue" IsRunning="{Binding PageModelHelper.ActivityRunning, Mode=TwoWay}"
+                                   IsVisible="{Binding PageModelHelper.ActivityRunning}" />
+                <Label Text="Informações do cuidador" IsVisible="{Binding PageModelHelper.Visualizar}" FontSize="20" FontAttributes="Bold" />
+                <Image Source="{Binding CuidadorFoto}" />
+                <Label Text="Nome" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="{Binding Cuidador.CuiNomeCompleto}" IsEnabled="{Binding PageModelHelper.CuidadorExibicao}"
+                       IsVisible="{Binding PageModelHelper.Visualizar}" />
+                <Label Text="Cidade" IsVisible="{Binding PageModelHelper.Visualizar}" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="{Binding Cuidador.CuiCidade}" IsEnabled="True"
+                       IsVisible="{Binding PageModelHelper.Visualizar}" />
+                <Label Text="Estado" IsVisible="{Binding PageModelHelper.Visualizar}" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="{Binding Cuidador.CuiEstado}" IsEnabled="True"
+                       IsVisible="{Binding PageModelHelper.Visualizar}" />
+                <Label Text="Profissão" IsVisible="{Binding PageModelHelper.Visualizar}" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Documento" IsVisible="{Binding PageModelHelper.Visualizar}" FontSize="20" FontAttributes="Bold"/>
+                <Image Source="{Binding Documento}" />
+                <Label Text="Média de nota" IsVisible="{Binding PageModelHelper.Visualizar}" FontSize="20" FontAttributes="Bold"/>
+                <rating:SfRating Value="{Binding PageModelHelper.Media}" ItemCount="5" TooltipPrecision="5"
+                                 TooltipPlacement="TopLeft" Precision="Exact" ReadOnly="True" />
+                <Button Text="Visualizar avaliações" Command="{Binding AvaliacaoCommand}" 
+                        IsVisible="{Binding PageModelHelper.Visualizar}" BackgroundColor="White" FontAttributes="Bold"
+                        BorderWidth="10" FontSize="20"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

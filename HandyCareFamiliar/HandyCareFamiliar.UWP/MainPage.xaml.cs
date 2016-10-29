@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using HandyCareFamiliar.Data;
 using Microsoft.WindowsAzure.MobileServices;
+using Syncfusion.SfRating.XForms.UWP;
 
 namespace HandyCareFamiliar.UWP
 {
@@ -14,6 +15,9 @@ namespace HandyCareFamiliar.UWP
         {
             InitializeComponent();
             HandyCareFamiliar.App.Init(this);
+            new SfRatingRenderer();
+            //FormsVideoPlayer.Init();
+            ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
             LoadApplication(new HandyCareFamiliar.App());
         }
 
