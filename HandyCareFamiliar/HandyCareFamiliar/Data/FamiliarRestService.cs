@@ -74,7 +74,8 @@ namespace HandyCareFamiliar.Data
         private readonly IMobileServiceTable<TipoContato> TipoContatoTable;
         private readonly IMobileServiceTable<Avaliacao> AvaliacaoTable;
         private readonly IMobileServiceTable<Camera> CameraTable;
-
+        private readonly IMobileServiceTable<ValidacaoAfazer> ValidacaoAfazerTable;
+        private readonly IMobileServiceTable<MotivoNaoValidacaoConclusaoAfazer> MotivoNaoValidacaoConclusaoAfazerTable;
 #endif
 
         public FamiliarRestService()
@@ -151,7 +152,8 @@ namespace HandyCareFamiliar.Data
             TipoContatoTable = CurrentClient.GetTable<TipoContato>();
             AvaliacaoTable = CurrentClient.GetTable<Avaliacao>();
             CameraTable = CurrentClient.GetTable<Camera>();
-
+            ValidacaoAfazerTable = CurrentClient.GetTable<ValidacaoAfazer>();
+            MotivoNaoValidacaoConclusaoAfazerTable = CurrentClient.GetTable<MotivoNaoValidacaoConclusaoAfazer>();
 #endif
         }
 
@@ -1794,6 +1796,69 @@ MotivoCuidadoTable.CreateQuery());
                 Debug.WriteLine(@"Sync error: {0}", e);
             }
             return null;
+        }
+
+        public async Task<ObservableCollection<ValidacaoAfazer>> RefreshValidacaoAfazerAsync(bool syncItems=true)
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                if (syncItems)
+                {
+                    await SyncAsync();
+                }
+#endif
+                var items = await ValidacaoAfazerTable
+                    .ToEnumerableAsync();
+                return new ObservableCollection<ValidacaoAfazer>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"Sync error: {0}", e);
+            }
+            return null;
+        }
+
+        public async Task SaveValidacaoAfazerAsync(ValidacaoAfazer item, bool isNewItem)
+        {
+            try
+            {
+                if (isNewItem)
+                    await ValidacaoAfazerTable.InsertAsync(item);
+                else
+                    await ValidacaoAfazerTable.UpdateAsync(item);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
+
+        public async Task SaveMotivoNaoValidacaoConclusaoAfazer(MotivoNaoValidacaoConclusaoAfazer item, bool isNewItem)
+        {
+            try
+            {
+                if (isNewItem)
+                    await MotivoNaoValidacaoConclusaoAfazerTable.InsertAsync(item);
+                else
+                    await MotivoNaoValidacaoConclusaoAfazerTable.UpdateAsync(item);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
     }
 }

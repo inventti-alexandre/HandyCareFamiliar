@@ -26,6 +26,7 @@ namespace HandyCareFamiliar.Model
 
         public string MedDescricao { get; set; }
         public string MedPacId { get; set; }
+        public string MedUnidade { get; set; }
 
         public virtual FormaApresentacaoMedicamento FormaApresentacaoMedicamento { get; set; }
 

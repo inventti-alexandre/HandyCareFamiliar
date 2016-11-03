@@ -14,8 +14,9 @@ using Java.IO;
 using Java.Net;
 using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
-using Com.Syncfusion.Rating;
 using Octane.Xam.VideoPlayer.Android;
+using Syncfusion.SfCalendar.XForms;
+using Syncfusion.SfCalendar.XForms.Droid;
 using Syncfusion.SfRating.XForms.Droid;
 using Xamarin.Forms.Platform.Android;
 using Debug = System.Diagnostics.Debug;
@@ -26,7 +27,7 @@ using Exception = Java.Lang.Exception;
 namespace HandyCareFamiliar.Droid
 {
     [Activity(Label = "Handy Care - Familiar", Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.Light",
-         MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsApplicationActivity, App.IAuthenticate
     {
         private static readonly File FotoFile = new File(Environment.GetExternalStoragePublicDirectory(
@@ -103,6 +104,8 @@ namespace HandyCareFamiliar.Droid
             CurrentPlatform.Init();
             App.Init(this);
             new SfRatingRenderer();
+            new SfCalendarRenderer();
+
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
             UserDialogs.Init(() => this);
             FormsVideoPlayer.Init();

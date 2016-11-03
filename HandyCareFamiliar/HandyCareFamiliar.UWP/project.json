@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Acr.UserDialogs": "6.2.6",
     "FreshMvvm": "2.2.0",
@@ -9,7 +9,8 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "Newtonsoft.Json": "9.0.1",
     "Rox.Xamarin.Video": "2.1.0-pre2",
-    "Syncfusion.Xamarin.SfRating": "14.3.0.49",
+    "Syncfusion.Xamarin.SfCalendar": "14.3.0.52",
+    "Syncfusion.Xamarin.SfRating": "14.3.0.52",
     "Xam.Plugin.Media": "2.6.0.4-beta",
     "Xamarin.Forms": "2.3.2.127",
     "ZXing.Net.Mobile.Forms": "2.1.47"

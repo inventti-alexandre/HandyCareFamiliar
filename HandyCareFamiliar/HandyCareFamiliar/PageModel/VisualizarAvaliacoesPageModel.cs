@@ -31,8 +31,11 @@ namespace HandyCareFamiliar.PageModel
             if (x == null) return;
             Avaliacoes = x;
             PageModelHelper.ActivityRunning = false;
-            if(Avaliacoes.Count>0)
+            if(Avaliacoes.Count==0)
             PageModelHelper.Visualizar = true;
+            else
+                PageModelHelper.Visualizar = false;
+
         }
         public Avaliacao SelectedAvaliacao
         {

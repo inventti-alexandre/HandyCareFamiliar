@@ -23,8 +23,14 @@ namespace HandyCareFamiliar.PageModel
         public Cuidador Cuidador { get; set; }
         public Avaliacao Avaliacao { get; set; }
         public ImageSource CuidadorFoto { get; set; }
+        public ImageSource DocumentoFoto { get; set; }
+        public ContatoEmergencia ContatoEmergencia { get; set; }
+        public ConCelular ConCelular { get; set; }
+        public ConEmail ConEmail { get; set; }
+        public ConTelefone ConTelefone { get; set; }
 
-        public ImageSource Documento { get; set; }
+        public TipoCuidador TipoCuidador { get; set; }
+        public ValidacaoCuidador ValidacaoCuidador { get; set; }
         public ObservableCollection<Avaliacao> Avaliacoes { get; set; }
 
         public override async void Init(object initData)
@@ -35,6 +41,8 @@ namespace HandyCareFamiliar.PageModel
                 ActivityRunning = true,
                 Visualizar = false
             };
+            TipoCuidador=new TipoCuidador();
+            ValidacaoCuidador=new ValidacaoCuidador();
             Familiar = new Familiar();
             Cuidador = new Cuidador();
             var x = initData as Tuple<Cuidador,Familiar>;
@@ -45,11 +53,10 @@ namespace HandyCareFamiliar.PageModel
             {
                 CuidadorFoto = ImageSource.FromStream(() => new MemoryStream(Cuidador.CuiFoto));
             }
-            //if (Cuidador. != null)
-            //{
-            //    Documento = ImageSource.FromStream(() => new MemoryStream(Cuidador.CuiFoto));
-            //}
-
+            ContatoEmergencia=new ContatoEmergencia();
+            ConEmail=new ConEmail();
+            ConCelular=new ConCelular();
+            ConTelefone=new ConTelefone();
             await GetAvaliacoes();
             PageModelHelper.ActivityRunning = false;
             PageModelHelper.Visualizar = true;
@@ -62,6 +69,36 @@ namespace HandyCareFamiliar.PageModel
                 {
                     await CoreMethods.PushPageModel<VisualizarAvaliacoesPageModel>(Avaliacoes);
                 });
+            }
+        }
+        public Command CelularCommand
+        {
+            get
+            {
+                return new Command(()=>
+                {
+                    Device.OpenUri(new Uri("tel:"+ConCelular.ConNumCelular));
+                });
+            }
+        }
+        public Command TelefoneCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    Device.OpenUri(new Uri("tel:"+ConTelefone.ConNumTelefone));
+                });
+            }
+        }
+        public Command EmailCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    Device.OpenUri(new Uri("mailto:"+ConEmail.ConEnderecoEmail));
+            });
             }
         }
 
@@ -84,11 +121,41 @@ namespace HandyCareFamiliar.PageModel
                     PageModelHelper.Media /= avaliacaos.Count();
                     Avaliacoes = new ObservableCollection<Avaliacao>(avaliacaos);
                 });
+                await Task.Run(async () =>
+                {
+                    ValidacaoCuidador = new ObservableCollection<ValidacaoCuidador>(
+                            await FamiliarRestService.DefaultManager.RefreshValidacaoCuidadorAsync(true))
+                        .FirstOrDefault(e => e.Id == Cuidador.CuiValidacaoCuidador);
+                    TipoCuidador = new ObservableCollection<TipoCuidador>(
+                            await FamiliarRestService.DefaultManager.RefreshTipoCuidadorAsync(true))
+                        .FirstOrDefault(e => e.Id == Cuidador.CuiTipoCuidador);
+                    if (ValidacaoCuidador.ValDocumento != null)
+                    {
+                        DocumentoFoto = ImageSource.FromStream(() => new MemoryStream(ValidacaoCuidador.ValDocumento));
+                    }
+                });
+                await Task.Run(async () =>
+                {
+                    ContatoEmergencia = new ObservableCollection<ContatoEmergencia>(
+                        await FamiliarRestService.DefaultManager.RefreshContatoEmergenciaAsync()).FirstOrDefault(
+                        e => e.Id == Cuidador.CuiContatoEmergencia);
+                    ConCelular = new ObservableCollection<ConCelular>(
+                        await FamiliarRestService.DefaultManager.RefreshConCelularAsync()).FirstOrDefault(e => e.Id == ContatoEmergencia.ConCelular);
+                    ConEmail = new ObservableCollection<ConEmail>(
+await FamiliarRestService.DefaultManager.RefreshConEmailAsync()).FirstOrDefault(e => e.Id == ContatoEmergencia.ConEmail);
+                    ConTelefone = new ObservableCollection<ConTelefone>(
+await FamiliarRestService.DefaultManager.RefreshConTelefoneAsync()).FirstOrDefault(e => e.Id == ContatoEmergencia.ConTelefone);
+                });
+
             }
             catch (ArgumentNullException e)
             {
                 Debug.WriteLine(e.Message);
-                throw;
+            }
+
+            catch (NullReferenceException e)
+            {
+                Debug.WriteLine(e.Message);
             }
         }
 

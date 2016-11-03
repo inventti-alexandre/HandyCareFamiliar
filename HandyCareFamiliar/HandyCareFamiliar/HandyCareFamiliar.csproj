@@ -40,8 +40,10 @@
     <Compile Include="Helper\Constants.cs" />
     <Compile Include="Data\FamiliarRestService.cs" />
     <Compile Include="Helper\BindablePicker.cs" />
-    <Compile Include="Helper\Estado.cs" />
+    <Compile Include="Helper\Convertion.cs" />
+    <Compile Include="Helper\Geoname.cs" />
     <Compile Include="Helper\HelperClass.cs" />
+    <Compile Include="Helper\MonthInlineAppointmentBehavior.cs" />
     <Compile Include="Helper\PageModelHelper.cs" />
     <Compile Include="Helper\ILoginManager.cs" />
     <Compile Include="Helper\ListSwitch.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Model\ViaAdministracaoMedicamento.cs" />
     <Compile Include="Model\Video.cs" />
     <Compile Include="Model\VideoFamiliar.cs" />
+    <Compile Include="PageModel\AcionarContatoEmergenciaPageModel.cs" />
     <Compile Include="PageModel\AfazerPageModel.cs" />
     <Compile Include="PageModel\AvaliarPageModel.cs" />
     <Compile Include="PageModel\BarcodeViewPageModel.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="PageModel\FamiliarPageModel.cs" />
     <Compile Include="PageModel\FotoPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerConcluidoPageModel.cs" />
+    <Compile Include="PageModel\ListaAfazeresValidadosPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerPageModel.cs" />
     <Compile Include="PageModel\ListaAvaliacaoPageModel.cs" />
     <Compile Include="PageModel\ListaCameraPageModel.cs" />
@@ -106,6 +110,9 @@
     <Compile Include="PageModel\PacientePageModel.cs" />
     <Compile Include="PageModel\VideoPageModel.cs" />
     <Compile Include="PageModel\VisualizarAvaliacoesPageModel.cs" />
+    <Compile Include="Page\AcionarContatoEmergenciaPage.xaml.cs">
+      <DependentUpon>AcionarContatoEmergenciaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\AfazerPage.xaml.cs">
       <DependentUpon>AfazerPage.xaml</DependentUpon>
     </Compile>
@@ -144,6 +151,9 @@
     </Compile>
     <Compile Include="Page\ListaAfazerConcluidoPage.xaml.cs">
       <DependentUpon>ListaAfazerConcluidoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ListaAfazeresValidadosPage.xaml.cs">
+      <DependentUpon>ListaAfazeresValidadosPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\ListaAfazerPage.xaml.cs">
       <DependentUpon>ListaAfazerPage.xaml</DependentUpon>
@@ -236,6 +246,10 @@
     </Reference>
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.SfCalendar.XForms, Version=14.3451.0.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfCalendar.14.3.0.52\lib\portable-win+net45+wp80+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Syncfusion.SfCalendar.XForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Syncfusion.SfRating.XForms, Version=14.3451.0.49, Culture=neutral, processorArchitecture=MSIL">
@@ -405,6 +419,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page\ListaCameraPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\AcionarContatoEmergenciaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\ListaAfazeresValidadosPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

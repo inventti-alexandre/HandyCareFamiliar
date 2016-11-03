@@ -11,6 +11,7 @@ using HandyCareFamiliar.Model;
 using HandyCareFamiliar.PageModel;
 using Microsoft.WindowsAzure.MobileServices;
 using Rox;
+using Syncfusion.SfCalendar.XForms;
 using Syncfusion.SfRating.XForms;
 using Xamarin.Forms;
 using ZXing.Mobile;
@@ -43,6 +44,7 @@ namespace HandyCareFamiliar
         {
             FreshIOC.Container.Register<IFamiliarRestService, FamiliarRestService>();
             FreshIOC.Container.Register<SfRating>(new SfRating());
+            FreshIOC.Container.Register<SfCalendar>(new SfCalendar());
             FreshIOC.Container.Register<VideoView>(new VideoView());
             FreshIOC.Container.Register<IUserDialogs>(UserDialogs.Instance);
             FreshIOC.Container.Register<MobileBarcodeScanner>(new MobileBarcodeScanner());

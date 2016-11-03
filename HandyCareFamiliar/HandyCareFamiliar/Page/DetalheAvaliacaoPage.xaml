@@ -10,7 +10,7 @@
                 <rating:SfRating Value="{Binding Avaliacao.AvaPontuacao}" ItemCount="5" TooltipPrecision="5"
                                  TooltipPlacement="TopLeft" Precision="Exact" ReadOnly="True"/>
                 <Label Text="Análise"/>
-                <Editor Text="{Binding Avaliacao.AvaDescricao}" HeightRequest="200" BackgroundColor="Gray" IsEnabled="False"/>
+                <Editor Text="{Binding Avaliacao.AvaDescricao}" HeightRequest="600" BackgroundColor="Gray" IsEnabled="False"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

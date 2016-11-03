@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using HandyCareFamiliar.Data;
 using Microsoft.WindowsAzure.MobileServices;
+using Syncfusion.SfCalendar.XForms.UWP;
 using Syncfusion.SfRating.XForms.UWP;
 
 namespace HandyCareFamiliar.UWP
@@ -16,6 +17,7 @@ namespace HandyCareFamiliar.UWP
             InitializeComponent();
             HandyCareFamiliar.App.Init(this);
             new SfRatingRenderer();
+            new SfCalendarRenderer();
             //FormsVideoPlayer.Init();
             ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
             LoadApplication(new HandyCareFamiliar.App());

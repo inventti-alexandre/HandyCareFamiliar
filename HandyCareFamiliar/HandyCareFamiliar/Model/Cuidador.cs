@@ -42,6 +42,7 @@ namespace HandyCareFamiliar.Model
 
         [JsonProperty(PropertyName = "CuiEstado")]
         public string CuiEstado { get; set; }
+        public string CuiContatoEmergencia { get; set; }
 
         public byte[] CuiFoto { get; set; }
 

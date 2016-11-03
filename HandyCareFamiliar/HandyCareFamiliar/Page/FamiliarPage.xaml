@@ -11,37 +11,51 @@
                 <ActivityIndicator Color="Blue" IsRunning="{Binding oHorario.ActivityRunning, Mode=TwoWay}"
                                    IsVisible="{Binding oHorario.ActivityRunning}" />
                 <Label Text="Suas informações" IsVisible="{Binding oHorario.Visualizar}" />
-                <Button Text="Sua foto" IsEnabled="{Binding oHorario.NovoFamiliar}"
+                <Image Source="{Binding FamiliarFoto}"/>
+                <Button Text="{Binding oHorario.BoasVindas}" IsEnabled="{Binding NovoFamiliar}"
                     Command="{Binding FotoFam}"
              IsVisible="{Binding oHorario.Visualizar}" />
-                <Image Source="{Binding FamiliarFoto}"/>
-                <Label Text="Nome"/>
-                <Entry Text="{Binding Familiar.FamNomeCompleto}" IsEnabled="{Binding oHorario.FamiliarExibicao}"
-             IsVisible="{Binding oHorario.Visualizar}" />
+
+                <!--<Entry Text="{Binding Familiar.FamNomeCompleto}" IsEnabled="{Binding oHorario.FamiliarExibicao}"
+             IsVisible="{Binding oHorario.Visualizar}" />-->
+                <Label Text="Nome" IsVisible="{Binding oHorario.Visualizar}"/>
                 <Entry Text="{Binding Familiar.FamNome}" IsEnabled="{Binding oHorario.NovoCadastro}"
              IsVisible="{Binding oHorario.Visualizar}" />
+                <Label Text="Sobrenome" IsVisible="{Binding oHorario.Visualizar}"/>
                 <Entry Text="{Binding Familiar.FamSobrenome}" IsEnabled="{Binding oHorario.NovoCadastro}"
              IsVisible="{Binding oHorario.Visualizar}" />
-                <Label Text="Cidade" IsVisible="{Binding oHorario.Visualizar}" />
-                <Entry Text="{Binding Familiar.FamCidade}" IsEnabled="{Binding oHorario.NovoFamiliar}"
-            IsVisible="{Binding oHorario.Visualizar}" />
+
                 <Label Text="Estado" IsVisible="{Binding oHorario.Visualizar}" />
-                <Entry Text="{Binding Familiar.FamEstado}" IsEnabled="{Binding oHorario.NovoFamiliar}"
-             IsVisible="{Binding oHorario.Visualizar}" />
+                <helper:BindablePicker DisplayMemberPath="name" Title="Selecione um Estado"
+                                          ItemsSource="{Binding ListaEstados}"
+                                          SelectedItem="{Binding SelectedEstado, Mode=TwoWay}"
+                                          IsVisible="{Binding oHorario.Visualizar}"
+                                          HorizontalOptions="FillAndExpand" />
+                <Label Text="Cidade" IsVisible="{Binding oHorario.Visualizar}" />
+                <helper:BindablePicker DisplayMemberPath="name" Title="Selecione uma Cidade"
+                                          ItemsSource="{Binding ListaCidades}"
+                                          SelectedItem="{Binding Cidade, Mode=TwoWay}"
+                                          IsVisible="{Binding oHorario.Visualizar}"
+                                          HorizontalOptions="FillAndExpand" />
+                <!--<Entry Text="{Binding Familiar.FamCidade}" IsEnabled="{Binding NovoFamiliar}"
+            IsVisible="{Binding oHorario.Visualizar}" />-->
+                <!--<Entry Text="{Binding Familiar.FamEstado}" IsEnabled="{Binding NovoFamiliar}"-->
+             <!--IsVisible="{Binding oHorario.Visualizar}" />-->
                 <Label Text="Celular" IsVisible="{Binding oHorario.Visualizar}" />
-                <Entry Text="{Binding ConCelular.ConNumCelular}" IsEnabled="{Binding oHorario.NovoFamiliar}"
+                <Entry Text="{Binding ConCelular.ConNumCelular}" IsEnabled="{Binding NovoFamiliar}"
              IsVisible="{Binding oHorario.Visualizar}" />
                 <Label Text="Telefone" IsVisible="{Binding oHorario.Visualizar}" />
-                <Entry Text="{Binding ConTelefone.ConNumTelefone}" IsEnabled="{Binding oHorario.NovoFamiliar}"
+                <Entry Text="{Binding ConTelefone.ConNumTelefone}" IsEnabled="{Binding NovoFamiliar}"
              IsVisible="{Binding oHorario.Visualizar}" />
                 <Label Text="E-mail" IsVisible="{Binding oHorario.Visualizar}" />
-                <Entry Text="{Binding ConEmail.ConEnderecoEmail}" IsEnabled="{Binding oHorario.NovoFamiliar}"
+                <Entry Text="{Binding ConEmail.ConEnderecoEmail}" IsEnabled="{Binding NovoFamiliar}"
              IsVisible="{Binding oHorario.Visualizar}" />
                 <Label Text="Parentesco" IsVisible="{Binding oHorario.Visualizar}" />
                 <helper:BindablePicker DisplayMemberPath="ParDescricao" Title="Selecione um parentesco"
                       ItemsSource="{Binding TiposFamiliares}" SelectedItem="{Binding SelectedParentesco, Mode=TwoWay}"
-                                        IsEnabled="{Binding oHorario.NovoFamiliar}" IsVisible="{Binding oHorario.Visualizar}"/>
+                                        IsEnabled="{Binding NovoFamiliar}" IsVisible="{Binding oHorario.Visualizar}"/>
                 <Button Text="Save" Command="{Binding SaveCommand}" IsVisible="{Binding oHorario.Visualizar}" />
+                <Button Text="Alterar" Command="{Binding AlterarCommand}" IsVisible="{Binding oHorario.Visualizar}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

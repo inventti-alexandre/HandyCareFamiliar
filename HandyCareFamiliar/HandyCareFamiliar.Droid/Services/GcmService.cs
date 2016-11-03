@@ -48,21 +48,17 @@ namespace HandyCareFamiliar.Droid.Services
         public static string RegistrationID { get; private set; }
         public Familiar Familiar { get; set; }
 
-        protected override async void OnRegistered(Context context, string registrationId)
+        protected override void OnRegistered(Context context, string registrationId)
         {
             Log.Verbose("PushHandlerBroadcastReceiver", "GCM Registered: " + registrationId);
             RegistrationID = registrationId;
 
             var push = FamiliarRestService.DefaultManager.CurrentClient.GetPush();
 
-                Familiar = new ObservableCollection<Familiar>(await 
-                    FamiliarRestService.DefaultManager.RefreshFamiliarAsync())
-                    .FirstOrDefault(e => e.FamInstallationId == push.InstallationId);
-            if (Familiar == null)
-            {
-                
-            }
-
+                //Familiar = new ObservableCollection<Familiar>(await 
+                //    FamiliarRestService.DefaultManager.RefreshFamiliarAsync())
+                //    .FirstOrDefault(e => e.FamInstallationId == push.InstallationId);
+                if(App.Authenticated)
             MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
         }
 
@@ -92,6 +88,7 @@ namespace HandyCareFamiliar.Droid.Services
 
         protected override void OnMessage(Context context, Intent intent)
         {
+
             Log.Info("PushHandlerBroadcastReceiver", "GCM Message Received!");
 
             var msg = new StringBuilder();
@@ -138,13 +135,13 @@ namespace HandyCareFamiliar.Droid.Services
             //we use the pending intent, passing our ui intent over which will get called
             //when the notification is tapped.
             var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
-                .SetSmallIcon(Android.Resource.Drawable.SymActionEmail)
+                .SetSmallIcon(Resource.Drawable.icon)
                 .SetTicker(title)
                 .SetContentTitle(title)
                 .SetContentText(desc)
 
                 //Set the notification sound
-                .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
+                .SetDefaults(-1)
 
                 //Auto cancel will remove the notification once the user touches it
                 .SetAutoCancel(true).Build();

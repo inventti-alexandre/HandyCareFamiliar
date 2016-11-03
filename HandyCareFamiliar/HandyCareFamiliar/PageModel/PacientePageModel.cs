@@ -17,6 +17,11 @@ namespace HandyCareFamiliar.PageModel
     {
         public Paciente Paciente { get; set; }
         public PacienteFamiliar PacienteFamiliar { get; set; }
+        public ObservableCollection<string> GrupoSanguineo { get; set; }
+        public ObservableCollection<string> Fator { get; set; }
+        public string SelectedGrupo { get; set; }
+        public string SelectedFator { get; set; }
+
         public MotivoCuidado MotivoCuidado { get; set; }
         public Familiar Familiar { get; set; }
         public TipoTratamento TipoTratamento { get; set; }
@@ -38,6 +43,7 @@ namespace HandyCareFamiliar.PageModel
                         oHorario.Visualizar = false;
                         oHorario.ActivityRunning = true;
                         Paciente.Id = Guid.NewGuid().ToString();
+                        Paciente.PacTipoSanguineo = SelectedGrupo + SelectedFator;
                         PacienteFamiliar = new PacienteFamiliar {Id = Guid.NewGuid().ToString()};
                         MotivoCuidado.Id = Guid.NewGuid().ToString();
                         PacienteFamiliar.PacId = Paciente.Id;
@@ -96,6 +102,8 @@ namespace HandyCareFamiliar.PageModel
             base.Init(initData);
             Familiar = new Familiar();
             Paciente = new Paciente();
+            GrupoSanguineo = new ObservableCollection<string> { "AB", "A", "B", "O" };
+            Fator = new ObservableCollection<string> { "+", "-" };
             PeriodoTratamento = new PeriodoTratamento
             {
                 PerInicio = DateTime.Now,
@@ -130,9 +138,9 @@ namespace HandyCareFamiliar.PageModel
             {
                 await Task.Run(async () =>
                 {
-                    var pacresult = new ObservableCollection<PacienteFamiliar>(
-                            await FamiliarRestService.DefaultManager.RefreshPacienteFamiliarAsync())
-                        .FirstOrDefault(e => e.PacId == Paciente.Id);
+                    //var pacresult = new ObservableCollection<PacienteFamiliar>(
+                    //        await FamiliarRestService.DefaultManager.RefreshPacienteFamiliarAsync())
+                    //    .FirstOrDefault(e => e.PacId == Paciente.Id);
                     //PeriodoTratamento = new ObservableCollection<PeriodoTratamento>(
                     //        await FamiliarRestService.DefaultManager.RefreshPeriodoTratamentoAsync())
                     //    .FirstOrDefault(e => e.Id == pacresult.CuiPeriodoTratamento);
@@ -148,6 +156,10 @@ namespace HandyCareFamiliar.PageModel
                     TipoTratamento = new ObservableCollection<TipoTratamento>(
                             await FamiliarRestService.DefaultManager.RefreshTipoTratamentoAsync())
                         .FirstOrDefault(e => e.TipCuidado.Contains(MotivoCuidado.Id));
+                    var a = Paciente.PacTipoSanguineo.IndexOf("+", StringComparison.Ordinal);
+                    SelectedGrupo = Paciente.PacTipoSanguineo.Split('+')[0];
+                    SelectedFator = Paciente.PacTipoSanguineo.Substring(a);
+
                 });
             }
             catch (Exception e)

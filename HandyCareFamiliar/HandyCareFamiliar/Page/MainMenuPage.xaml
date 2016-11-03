@@ -12,7 +12,7 @@
             <StackLayout Orientation="Vertical" Padding="5" BackgroundColor="White">
                 <StackLayout Orientation="Horizontal">
                     <helper:BindablePicker DisplayMemberPath="PacNomeCompleto"
-                                           IsVisible="{Binding oHorario.Visualizar}" Title="Selecione um paciente"
+                                           IsVisible="{Binding oHorario.Visualizar}" Title="Selecione um familiar"
                                            ItemsSource="{Binding Pacientes}"
                                            SelectedItem="{Binding SelectedPaciente, Mode=TwoWay}"
                                            HorizontalOptions="FillAndExpand" />
@@ -80,10 +80,10 @@
                     </ContentView>
                     <ContentView Grid.Column="0" Grid.Row="4">
                         <Button x:Name="btnInfo" BackgroundColor="White" BorderColor="Black"
-                                Command="{Binding ShowCuidador}" IsVisible="{Binding oHorario.Visualizar}"
+                                Command="{Binding ShowFamiliar}" IsVisible="{Binding oHorario.Visualizar}"
                                 VerticalOptions="Center" HorizontalOptions="Start" />
                     </ContentView>
-                    <ContentView Grid.Column="0" Grid.Row="4">
+                    <ContentView Grid.Column="1" Grid.Row="4">
                         <Button x:Name="btnCodigo" BackgroundColor="White" BorderColor="Black"
                                 Command="{Binding ShowCodigo}" IsVisible="{Binding oHorario.Visualizar}"
                                 VerticalOptions="Center" HorizontalOptions="Start" />

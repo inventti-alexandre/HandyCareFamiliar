@@ -88,7 +88,8 @@ namespace HandyCareFamiliar.PageModel
             {
                 return new Command(async () =>
                 {
-                    //await CoreMethods.PushPageModel<FamiliarPageModel>(Familiar);
+                    var x = new Tuple<Familiar,App>(Familiar,null);
+                    await CoreMethods.PushPageModel<FamiliarPageModel>(x);
                 });
             }
         }
@@ -103,7 +104,7 @@ namespace HandyCareFamiliar.PageModel
                     {
                         PacienteFamiliar = FamiliaresPacientes.FirstOrDefault(e => e.PacId == SelectedPaciente.Id);
                         var x = new Tuple<Paciente, PacienteFamiliar>(SelectedPaciente, PacienteFamiliar);
-                        //await CoreMethods.PushPageModel<ListaAfazerPageModel>(x);
+                        await CoreMethods.PushPageModel<ListaAfazerPageModel>(x);
                     }
                     else
                     {
@@ -134,7 +135,7 @@ namespace HandyCareFamiliar.PageModel
                     if (SelectedPaciente != null)
                     {
                         var x = new Tuple<Paciente, bool, Familiar>(SelectedPaciente, false, Familiar);
-                        //await CoreMethods.PushPageModel<PacientePageModel>(x);
+                        await CoreMethods.PushPageModel<PacientePageModel>(x);
                     }
                     else
                     {
@@ -204,7 +205,7 @@ namespace HandyCareFamiliar.PageModel
                     if (SelectedPaciente != null)
                     {
                         var tupla = new Tuple<Familiar, Paciente>(Familiar, SelectedPaciente);
-                        //await CoreMethods.PushPageModel<AcionarContatoEmergencia>(tupla);
+                        await CoreMethods.PushPageModel<AcionarContatoEmergenciaPageModel>(tupla);
                     }
                     else
                     {
