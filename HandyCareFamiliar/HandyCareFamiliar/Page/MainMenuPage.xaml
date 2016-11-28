@@ -89,7 +89,7 @@
                                 VerticalOptions="Center" HorizontalOptions="Start" />
                     </ContentView>
                 </Grid>
-                <Button x:Name="btnContato" BackgroundColor="Red" BorderColor="Black"
+                <Button x:Name="btnContato" BackgroundColor="Red" BorderColor="Black" TextColor="White"
                         Command="{Binding AlertarContatos}" IsVisible="{Binding oHorario.Visualizar}"
                         HorizontalOptions="FillAndExpand" />
             </StackLayout>

@@ -55,11 +55,21 @@ namespace HandyCareFamiliar.Droid.Services
 
             var push = FamiliarRestService.DefaultManager.CurrentClient.GetPush();
 
-                //Familiar = new ObservableCollection<Familiar>(await 
-                //    FamiliarRestService.DefaultManager.RefreshFamiliarAsync())
-                //    .FirstOrDefault(e => e.FamInstallationId == push.InstallationId);
-                if(App.Authenticated)
+            //Familiar = new ObservableCollection<Familiar>(await 
+            //    FamiliarRestService.DefaultManager.RefreshFamiliarAsync())
+            //    .FirstOrDefault(e => e.FamInstallationId == push.InstallationId);
+            //do
+            //{
+            //    Task.Run(async () =>
+            //    {
+            //        if (App.Authenticated)
+            //            MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
+            //        await Task.Delay(35000);
+
+            //    });
+            //} while (App.Authenticated==false);
             MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
+
         }
 
         public async void Register(Push push, IEnumerable<string> tags)
@@ -106,7 +116,7 @@ namespace HandyCareFamiliar.Droid.Services
             var message = intent.Extras.GetString("message");
             if (!string.IsNullOrEmpty(message))
             {
-                createNotification("New todo item!", "Todo item: " + message);
+                createNotification("Handy Care - Familiar", message);
                 return;
             }
 

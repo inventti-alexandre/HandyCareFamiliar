@@ -28,6 +28,7 @@ namespace HandyCareFamiliar.PageModel
         public Afazer AfazerSelecionado { get; set; }
         public PacienteFamiliar PacienteFamiliar { get; set; }
         public ObservableCollection<Afazer> Afazeres { get; set; }
+        public ObservableCollection<MotivoNaoValidacaoConclusaoAfazer> MotivoNaoValidacaoConclusaoAfazeres { get; set; }
         public ObservableCollection<ValidacaoAfazer> AfazeresValidados { get; set; }
 
         public Afazer SelectedAfazer
@@ -42,6 +43,16 @@ namespace HandyCareFamiliar.PageModel
             }
         }
 
+        public Command VisualizarNaoValidados
+        {
+            get
+            {
+                return new Command( async() =>
+                {
+                    await CoreMethods.PushPageModel<ListaAfazeresNaoValidadosPageModel>(PacienteFamiliar);
+                });
+            }
+        }
         public Command<Afazer> AfazerSelected
         {
             get
@@ -116,22 +127,39 @@ namespace HandyCareFamiliar.PageModel
                                 await FamiliarRestService.DefaultManager.RefreshCuidadorPacienteAsync())
                             .Where(e => e.PacId == PacienteFamiliar.PacId)
                             .AsEnumerable();
-                    AfazeresValidados =
-                        new ObservableCollection<ValidacaoAfazer>(
-                            await FamiliarRestService.DefaultManager.RefreshValidacaoAfazerAsync());
-                    var selection =
-                        new ObservableCollection<Afazer>(await FamiliarRestService.DefaultManager.RefreshAfazerAsync());
-                    if (AfazeresValidados.Count > 0)
+                    MotivoNaoValidacaoConclusaoAfazeres = new ObservableCollection<MotivoNaoValidacaoConclusaoAfazer>(
+                        await FamiliarRestService.DefaultManager.RefreshMotivoNaoValidacaoConclusaoAfazerAsync());
+                    if (MotivoNaoValidacaoConclusaoAfazeres.Count > 0)
                     {
-                        var result = selection.Where(e => AfazeresValidados.Select(m => m.ValAfazer)
-                                .Contains(e.Id))
-                            .Where(e => pacresult.Select(m => m.Id).Contains(e.AfaPaciente))
-                            .AsEnumerable();
-                        Afazeres = new ObservableCollection<Afazer>(result);
+                        var x =
+    new ObservableCollection<ValidacaoAfazer>(
+        await FamiliarRestService.DefaultManager.RefreshValidacaoAfazerAsync()).Where(e => e.ValValidado).
+        Where(e => !MotivoNaoValidacaoConclusaoAfazeres.Select(y => y.MoValidacao).Contains(e.Id)).AsEnumerable();
+                        AfazeresValidados = new ObservableCollection<ValidacaoAfazer>(x);
+
                     }
                     else
                     {
-                        Afazeres = new ObservableCollection<Afazer>(selection);
+                        AfazeresValidados= new ObservableCollection<ValidacaoAfazer>(
+        await FamiliarRestService.DefaultManager.RefreshValidacaoAfazerAsync());
+                    }
+
+                    if (AfazeresValidados.Count > 0)
+                    {
+                        var py = new ObservableCollection<ConclusaoAfazer>(
+    await FamiliarRestService.DefaultManager.RefreshConclusaoAfazerAsync()).Where(e => AfazeresValidados.Select(y => y.ValAfazer).Contains(e.Id));
+                        var result =
+        new ObservableCollection<Afazer>(await FamiliarRestService.DefaultManager.RefreshAfazerAsync()).Where(e => py.Select(y => y.ConAfazer).Contains(e.Id)).AsEnumerable();
+
+                        //    var result = py.Where(e => AfazeresValidados.Select(m => m.ValAfazer)
+                        //            .Contains(e.Id))
+                        //        .Where(e => pacresult.Select(m => m.Id).Contains(e.AfaPaciente))
+                        //        .AsEnumerable();
+                            Afazeres = new ObservableCollection<Afazer>(result);
+                    }
+                    else
+                    {
+                        Afazeres = new ObservableCollection<Afazer>(await FamiliarRestService.DefaultManager.RefreshAfazerAsync());
 
                     }
                 });

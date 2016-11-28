@@ -65,7 +65,7 @@ namespace HandyCareFamiliar.Droid
                     provider);
                 if (_user != null)
                 {
-                    message = $"you are now signed-in as {_user.UserId}.";
+                    message = "Login realizado com sucesso"; //$"you are now signed-in as {_user.UserId}.";
                     success = true;
                     var a = new Thread(() => { ThreadPool.QueueUserWorkItem(async o => await StartAfazerService()); });
                     a.Start();

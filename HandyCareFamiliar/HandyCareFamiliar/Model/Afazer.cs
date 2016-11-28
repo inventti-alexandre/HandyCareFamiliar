@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using PropertyChanged;
 
 namespace HandyCareFamiliar.Model
@@ -22,6 +23,10 @@ namespace HandyCareFamiliar.Model
 
         public string AfaObservacao { get; set; }
         public string AfaPaciente { get; set; }
+        [JsonIgnore]
+        public string AfaDescricaoMotivoNaoValidacaoAfazer { get; set; }
+        public string AfaTitulo { get; set; }
+        public bool AfaRecorrente { get; set; }
         public DateTime AfaHorarioPrevistoTermino { get; set; }
         public string AfaCor { get; set; }
 

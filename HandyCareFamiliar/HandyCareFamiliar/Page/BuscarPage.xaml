@@ -9,7 +9,6 @@
                                IsVisible="{Binding oHorario.ActivityRunning}" />
 
             <Label Text="Informe o Estado" IsVisible="{Binding PageModelHelper.Visualizar}"/>
-            <!--<Entry Text="{Binding PageModelHelper.Estado}"/>-->
             <helper:BindablePicker DisplayMemberPath="name" Title="Selecione um Estado"
                                           ItemsSource="{Binding ListaEstados}"
                                           SelectedItem="{Binding SelectedEstado, Mode=TwoWay}"
@@ -22,8 +21,6 @@
                                           SelectedItem="{Binding Cidade, Mode=TwoWay}"
                                           IsVisible="{Binding PageModelHelper.Visualizar}"
                                           HorizontalOptions="FillAndExpand" />
-
-            <!--<Entry Text="{Binding PageModelHelper.Cidade}"/>-->
             <Button Text="Buscar" Command="{Binding BuscarCommand}" IsVisible="{Binding PageModelHelper.Visualizar}"/>
             <Label Text="Nenhum profissional encontrado nessa localidade" IsVisible="{Binding PageModelHelper.CuidadorExibicao}"></Label>
             <ListView x:Name="lstCuidadores" ItemsSource="{Binding Cuidadores, Mode=TwoWay}"

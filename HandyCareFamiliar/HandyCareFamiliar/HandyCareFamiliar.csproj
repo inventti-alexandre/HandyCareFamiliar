@@ -99,6 +99,7 @@
     <Compile Include="PageModel\FamiliarPageModel.cs" />
     <Compile Include="PageModel\FotoPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerConcluidoPageModel.cs" />
+    <Compile Include="PageModel\ListaAfazeresNaoValidadosPageModel.cs" />
     <Compile Include="PageModel\ListaAfazeresValidadosPageModel.cs" />
     <Compile Include="PageModel\ListaAfazerPageModel.cs" />
     <Compile Include="PageModel\ListaAvaliacaoPageModel.cs" />
@@ -151,6 +152,9 @@
     </Compile>
     <Compile Include="Page\ListaAfazerConcluidoPage.xaml.cs">
       <DependentUpon>ListaAfazerConcluidoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ListaAfazeresNaoValidadosPage.xaml.cs">
+      <DependentUpon>ListaAfazeresNaoValidadosPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\ListaAfazeresValidadosPage.xaml.cs">
       <DependentUpon>ListaAfazeresValidadosPage.xaml</DependentUpon>
@@ -431,6 +435,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page\ListaAfazeresValidadosPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page\ListaAfazeresNaoValidadosPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

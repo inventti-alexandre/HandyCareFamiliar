@@ -12,11 +12,13 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="15">
+                <Label Text="Título da tarefa" />
+                <Entry Text="{Binding Afazer.AfaTitulo}" Placeholder="Descreva o que deverá ser feito" />
                 <Label Text="Horário Previsto" />
                 <DatePicker Date="{Binding oHorario.Data, Mode=TwoWay}" />
                 <TimePicker Time="{Binding oHorario.Horario, Mode=TwoWay}" />
                 <Label Text="Observação" />
-                <Entry Text="{Binding Afazer.AfaObservacao}" Placeholder="Descreva o que deverá ser feito" />
+                <Entry Text="{Binding Afazer.AfaObservacao}" Placeholder="Observações sobre o que deverá ser feito" />
                 <Label Text="Material" />
                 <Switch IsToggled="{Binding oHorario.HabilitarMaterial, Mode=TwoWay}" />
                 <StackLayout Orientation="Horizontal">
@@ -27,8 +29,6 @@
                                            HorizontalOptions="FillAndExpand" />
                     <Button Text="+" FontAttributes="Bold" BackgroundColor="Green" TextColor="White"
                             HorizontalOptions="End" HeightRequest="15" IsVisible="{Binding oHorario.HabilitarMaterial}" />
-                    <!--Command="{Binding AddPaciente}"-->
-
                 </StackLayout>
                 <Label Text="Quantidade de material" IsVisible="{Binding oHorario.HabilitarMaterial}" />
                 <Entry

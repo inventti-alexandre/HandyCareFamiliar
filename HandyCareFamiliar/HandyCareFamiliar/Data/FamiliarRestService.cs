@@ -86,8 +86,8 @@ namespace HandyCareFamiliar.Data
             //            {
             //                AlternateLoginHost = new Uri("https://handycareapp.azurewebsites.net/")
             //            };
-            //#else
-            //               MobileService = new MobileServiceClient("https://{servicename}.azurewebsites.net/");  
+            //            ////#else
+            //            ////                           MobileService = new MobileServiceClient("https://{servicename}.azurewebsites.net/");  
             //#endif
 #if OFFLINE_SYNC_ENABLED
             var store = new MobileServiceSQLiteStore("localstore.db");
@@ -1859,6 +1859,31 @@ MotivoCuidadoTable.CreateQuery());
             {
                 Debug.WriteLine(e.Message);
             }
+        }
+
+        public async Task<ObservableCollection<MotivoNaoValidacaoConclusaoAfazer>> RefreshMotivoNaoValidacaoConclusaoAfazerAsync()
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                if (syncItems)
+                {
+                    await SyncAsync();
+                }
+#endif
+                var items = await MotivoNaoValidacaoConclusaoAfazerTable
+                    .ToEnumerableAsync();
+                return new ObservableCollection<MotivoNaoValidacaoConclusaoAfazer>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"Sync error: {0}", e);
+            }
+            return null;
         }
     }
 }

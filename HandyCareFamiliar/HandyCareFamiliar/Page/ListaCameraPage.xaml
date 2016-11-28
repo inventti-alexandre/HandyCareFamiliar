@@ -9,14 +9,14 @@
         <StackLayout>
             <ActivityIndicator Color="Blue" IsRunning="{Binding PageModelHelper.ActivityRunning, Mode=TwoWay}"
                                IsVisible="{Binding PageModelHelper.ActivityRunning}" />
-            <Label Text="Nenhuma câmera cadastrada" IsVisible="{Binding PageModelHelper.Visualizar}" />
+            <!--<Label Text="Nenhuma câmera cadastrada" IsVisible="{Binding PageModelHelper.Visualizar}" />-->
             <ListView x:Name="lstCamera" ItemsSource="{Binding Cameras, Mode=TwoWay}"
                       SelectedItem="{Binding SelectedCamera}" IsVisible="True" RowHeight="60">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Vertical" Padding="10">
-                                <Label Text="{Binding CamIPv4}" TextColor="Black"
+                                <Label Text="{Binding CamDescricao}" TextColor="Black"
                                        HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="20" />
                                 <!--<Label Text="{Binding AfaObservacao}" TextColor="Black"
                                        HorizontalOptions="StartAndExpand" FontSize="15" />-->

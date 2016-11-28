@@ -18,6 +18,7 @@
             <Label Text="{Binding oMedicamento.MedDescricao, Mode=TwoWay}" IsEnabled="False" />
             <Label Text="Quantidade de medicamento" />
             <Label Text="{Binding oMedicamento.MedQuantidade, Mode=TwoWay}" />
+            <Button Text="Validar afazer" Command="{Binding ValidarAfazer}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

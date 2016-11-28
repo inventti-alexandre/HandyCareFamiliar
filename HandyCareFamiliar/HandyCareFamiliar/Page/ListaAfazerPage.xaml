@@ -11,10 +11,10 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <!--<ToolbarItem Name="Novo afazer" Command="{Binding AddAfazer}" Order="Primary" Priority="0" />-->
-        <ToolbarItem Name="Validar afazeres concluídos" Command="{Binding VisualizarValidacao}" Order="Primary"
-                     Priority="0" />
-        <ToolbarItem Name="Visualizar afazeres concluídos" Command="{Binding VisualizarConcluidos}" Order="Primary"
+        <ToolbarItem Name="Afazeres concluídos" Command="{Binding VisualizarConcluidos}" Order="Primary"
                      Priority="1" />
+        <ToolbarItem Name="Afazeres validados" Command="{Binding VisualizarValidacao}" Order="Primary"
+                     Priority="0" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

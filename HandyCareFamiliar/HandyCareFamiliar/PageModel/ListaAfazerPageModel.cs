@@ -126,7 +126,10 @@ namespace HandyCareFamiliar.PageModel
             {
                 return
                     new Command(
-                        async () => { await CoreMethods.PushPageModel<ListaAfazeresValidadosPageModel>(PacienteFamiliar); });
+                        async () =>
+                        {
+                            await CoreMethods.PushPageModel<ListaAfazeresValidadosPageModel>(PacienteFamiliar);
+                        });
             }
         }
 
@@ -136,7 +139,10 @@ namespace HandyCareFamiliar.PageModel
             {
                 return
                     new Command(
-                        async () => { await CoreMethods.PushPageModel<ListaAfazerConcluidoPageModel>(oPaciente); });
+                        async () =>
+                        {
+                            await CoreMethods.PushPageModel<ListaAfazerConcluidoPageModel>(PacienteFamiliar);
+                        });
             }
         }
 

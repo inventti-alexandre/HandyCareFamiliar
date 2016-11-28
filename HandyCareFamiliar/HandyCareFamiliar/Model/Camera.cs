@@ -20,6 +20,8 @@ namespace HandyCareFamiliar.Model
 
         [StringLength(50)]
         public string CamIPv6 { get; set; }
+        public string CamDescricao { get; set; }
+
         public virtual Familiar Familiar { get; set; }
 
     }
